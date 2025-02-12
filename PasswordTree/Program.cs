@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PasswordTree.Password_Generator;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -16,7 +17,7 @@ namespace PasswordTree
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            Application.Run(new PasswordGeneratorForm());
         }
     }
 }
