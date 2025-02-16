@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace PasswordTree.Tree_Structure
 {
-    public class Node
+    public class Node : IEnumerable<Node>
     {
         string key;
         object value;
@@ -88,35 +88,14 @@ namespace PasswordTree.Tree_Structure
         }
 
 
-        public MyEnumerator GetEnumerator()
+        public IEnumerator<Node> GetEnumerator()
         {
-            return new MyEnumerator(this);
+            return children.GetEnumerator();
         }
 
-        public class MyEnumerator
+        IEnumerator IEnumerable.GetEnumerator()
         {
-            int index;
-            Node node;
-            public MyEnumerator(Node coll)
-            {
-                node = coll;
-                index = -1;
-            }
-
-            public bool MoveNext()
-            {
-                index++;
-                return (index < node.children.Count);
-            }
-
-            public Node Current
-            {
-                get
-                {
-                    return node.children[index];
-
-                }
-            }
+            return GetEnumerator();
         }
     }
 }
