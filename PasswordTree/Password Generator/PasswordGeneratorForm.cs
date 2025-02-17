@@ -16,6 +16,9 @@ namespace PasswordTree.Password_Generator
         public PasswordGeneratorForm()
         {
             InitializeComponent();
+            var a =Data.DefaultTree();
+            textBoxCurrentPassword.Text = a.Travers();
         }
+
     }
 }

@@ -4,91 +4,60 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace PasswordTree.Tree_Structure
 {
-    public class Node : IEnumerable<Node>
+    public class Node<T> : IEnumerable<Node<T>>
     {
-        string key;
-        object value;
-        internal int level;
-        string path;
-        Node parent;
-        internal List<Node> children = new List<Node>();
+        public T Data { get; set; }
+        public string Name { get; set; }
 
-        public Node(string name, object data = null)
-        {
-            key = name;
-            value = data;
-            path = name;
-        }
-        public Node(Node node)
-        {
-            key = node.key;
-            value = node.value;
-            level = node.level;
-            path = node.path;
-            parent = node.parent;
-            children = node.children.ToList();
-        }
-
-        public string Key { get => key; set => key = value; }
-        public object Value { get => value; set => this.value = value; }
-        public int Level { get => level; }
-        public bool hasParent { get => !(parent == null); }
-        public string Path { get => path; }
-        public Node Parent { get => parent; }
-        public Node this[int index] { get => children[index]; }
-        public Node this[string nodeName] { get => children.Where(x => x.key == nodeName).ToList()[0]; }
+        List<Node<T>> children = new List<Node<T>>();
+        public List<Node<T>> Children { get => children; }
         public int ChildrenCount { get => children.Count; }
 
-        public void AddChild(Node childNode)
+
+        public Node(T data)
         {
-            childNode.level = this.level + 1;
-            childNode.parent = this;
-            childNode.path = $"{path}->{childNode.key}";
-            children.Add(childNode);
+            Data = data;
         }
-        public void AddChild(string childName)
+
+        public Node(T data, params Node<T>[] children) : this(data)
         {
-            AddChild(new Node(childName));
+            AddChildren(children);
         }
-        public void AddChildren(params string[] childrenNames)
+
+        public void AddChild(Node<T> child)
         {
-            foreach (string nodeName in childrenNames)
+            children.Add(child);
+        }
+
+        public void AddChildren(params Node<T>[] children)
+        {
+            foreach (Node<T> child in children)
             {
-                AddChild(nodeName);
+                AddChild(child);
             }
         }
 
-        public void DeleteChild(Node node)
+        public void DeleteChild(Node<T> node)
         {
             if (children.Contains(node)) children.Remove(node);
         }
-        public void DeleteChildAt(int childIndex)
-        {
-            DeleteChild(children[childIndex]);
-        }
 
-        public bool SameAncestorLevel(Node node, int level)
+        public void DeleteChildAt(int index)
         {
-            if (node == null || (string.IsNullOrEmpty(node.path) ^ string.IsNullOrEmpty(path))) return false;
-            return GetParentAt(level) == node.GetParentAt(level);
-        }
-
-        public Node GetParentAt(int level)
-        {
-            if (parent.level == level) return parent;
-            return parent.GetParentAt(level);
+            if (index >= 0 && index <= children.Count) children.RemoveAt(index);
         }
 
         public override string ToString()
         {
-            return key;
+            return Data.ToString();
         }
 
 
-        public IEnumerator<Node> GetEnumerator()
+        public IEnumerator<Node<T>> GetEnumerator()
         {
             return children.GetEnumerator();
         }

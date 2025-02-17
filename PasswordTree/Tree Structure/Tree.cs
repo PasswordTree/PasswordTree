@@ -1,49 +1,41 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Remoting.Messaging;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 
 namespace PasswordTree.Tree_Structure
 {
-    public class Tree
+    internal class Tree<T>
     {
-        Node root;
-        public Node Root { get => root; }
-        public Node[] Leaves { get => GetNodesByDFS(root).Where(x => x.ChildrenCount == 0).ToArray(); }
+        public Node<T> Root { get; set; }
 
-        public Tree(Node root)
+        public Tree(Node<T> root)
         {
-            this.root = root;
-            this.root.level = 0;
+            Root = root;
         }
 
-        public string TraverseDFS(string seprator = " ")
+        public Tree(Node<T> root, params Node<T>[] children) : this(root)
         {
-            List<Node> nodes = GetNodesByDFS(root).ToList();
-            string[] s = nodes.Select(x => $"{string.Concat(Enumerable.Repeat(seprator, x.level))}{x.Key}: {x.Value}").ToArray();
-            return string.Join("\r\n", s);
+            root.AddChildren(children);
         }
-        List<Node> GetNodesByDFS(Node node)
+
+        public string Travers(string seperator = "\t")
         {
-            List<Node> s = new List<Node> { node };
-            foreach (var item in node)
+            string DFS(Node<T> node, int repaetCount = 0)
             {
-                s.AddRange(GetNodesByDFS(item));
+                string s = string.Concat(Enumerable.Repeat(seperator, repaetCount)) + node + "\r\n";
+                foreach (var child in node)
+                {
+                    s += DFS(child, repaetCount + 1);
+                }
+                return s;
             }
-            return s;
-        }
+            string dfs = DFS(Root);
 
-        public List<Node> GetNodesAt(int level)
-        {
-            List<Node> nodes = new List<Node> { root };
-
-            for (int i = 1; i <= level; i++)
-            {
-                nodes = nodes.SelectMany(x => x.children).ToList();
-            }
-            return nodes;
+            return dfs;
         }
     }
 }
