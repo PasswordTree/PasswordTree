@@ -33,9 +33,9 @@
             this.textBoxCurrentPassword = new System.Windows.Forms.TextBox();
             this.buttonGeneratePassword = new System.Windows.Forms.Button();
             this.textBoxPreviousPasswords = new System.Windows.Forms.TextBox();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            this.numericPasswordLength = new System.Windows.Forms.NumericUpDown();
             this.menuStrip1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericPasswordLength)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -70,6 +70,7 @@
             this.buttonGeneratePassword.TabIndex = 3;
             this.buttonGeneratePassword.Text = "Generate";
             this.buttonGeneratePassword.UseVisualStyleBackColor = true;
+            this.buttonGeneratePassword.Click += new System.EventHandler(this.buttonGeneratePassword_Click);
             // 
             // textBoxPreviousPasswords
             // 
@@ -79,13 +80,13 @@
             this.textBoxPreviousPasswords.Size = new System.Drawing.Size(302, 173);
             this.textBoxPreviousPasswords.TabIndex = 4;
             // 
-            // numericUpDown1
+            // numericPasswordLength
             // 
-            this.numericUpDown1.Location = new System.Drawing.Point(551, 225);
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(120, 20);
-            this.numericUpDown1.TabIndex = 5;
-            this.numericUpDown1.Value = new decimal(new int[] {
+            this.numericPasswordLength.Location = new System.Drawing.Point(551, 225);
+            this.numericPasswordLength.Name = "numericPasswordLength";
+            this.numericPasswordLength.Size = new System.Drawing.Size(120, 20);
+            this.numericPasswordLength.TabIndex = 5;
+            this.numericPasswordLength.Value = new decimal(new int[] {
             20,
             0,
             0,
@@ -96,7 +97,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 269);
-            this.Controls.Add(this.numericUpDown1);
+            this.Controls.Add(this.numericPasswordLength);
             this.Controls.Add(this.textBoxPreviousPasswords);
             this.Controls.Add(this.buttonGeneratePassword);
             this.Controls.Add(this.textBoxCurrentPassword);
@@ -106,7 +107,7 @@
             this.Text = "PasswordGeneratorForm";
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericPasswordLength)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -119,6 +120,6 @@
         private System.Windows.Forms.TextBox textBoxCurrentPassword;
         private System.Windows.Forms.Button buttonGeneratePassword;
         private System.Windows.Forms.TextBox textBoxPreviousPasswords;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private System.Windows.Forms.NumericUpDown numericPasswordLength;
     }
 }

@@ -17,5 +17,11 @@ namespace PasswordTree.Password_Generator
         {
             InitializeComponent();
         }
+
+        private void buttonGeneratePassword_Click(object sender, EventArgs e)
+        {
+            PasswordGenerator passwordGenerator = new PasswordGenerator(Data.DefaultTree());
+            textBoxCurrentPassword.Text += passwordGenerator.Create((int)numericPasswordLength.Value) + "\r\n";
+        }
     }
 }
