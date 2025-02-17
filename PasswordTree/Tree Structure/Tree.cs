@@ -8,9 +8,27 @@ using System.Xml.Linq;
 
 namespace PasswordTree.Tree_Structure
 {
-    internal class Tree<T>
+    internal class Tree<T> where T : IEquatable<T>
     {
         public Node<T> Root { get; set; }
+
+        public List<Node<T>> Leaves
+        {
+            get
+            {
+                List<Node<T>> DFS(Node<T> node)
+                {
+                    List<Node<T>> leaves = new List<Node<T>> { node };
+                    foreach (var child in node)
+                    {
+                        leaves.AddRange(DFS(child));
+                    }
+                    return leaves;
+                }
+
+                return DFS(Root).Where(node => node.IsLeaf).ToList();
+            }
+        }
 
         public Tree(Node<T> root)
         {
