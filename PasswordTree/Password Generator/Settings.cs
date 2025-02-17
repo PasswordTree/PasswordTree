@@ -18,6 +18,7 @@ namespace PasswordTree.Password_Generator
         internal static class Password
         {
             public static int MaximumLength { get; set; }
+            public static bool IsDistinct { get; set; }
         }
     }
 }
