@@ -11,15 +11,13 @@ namespace PasswordTree.Password_Generator
     {
         internal static class PasswordCatagory
         {
-            public static int Maximum { get; set; }
-            public static int Count { get; set; }
+            public static int MaximumLength { get; set; }
+            public static int CuerentLength { get; set; }
         }
 
         internal static class Password
         {
-            public static int Maximum { get; set; }
-            public static int Count { get; set; }
-            public static bool IsDistinct { get; set; }
+            public static int MaximumLength { get; set; }
         }
     }
 }
