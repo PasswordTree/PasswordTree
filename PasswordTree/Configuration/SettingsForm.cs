@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PasswordTree.Password_Generator;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -19,7 +20,7 @@ namespace PasswordTree.Configuration
 
         private void SettingsForm_Load(object sender, EventArgs e)
         {
-           
+            treeView1.Nodes.Add(Data.DefaultTree());
         }
 
         private void button1_Click(object sender, EventArgs e)
