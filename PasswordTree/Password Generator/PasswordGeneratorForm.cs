@@ -1,4 +1,5 @@
-﻿using PasswordTree.Help_Section;
+﻿using PasswordTree.Configuration;
+using PasswordTree.Help_Section;
 using PasswordTree.Tree_Structure;
 using System;
 using System.Collections.Generic;
@@ -28,6 +29,14 @@ namespace PasswordTree.Password_Generator
         private void aboutAppsIconToolStripMenuItem_Click(object sender, EventArgs e)
         {
             using (AboutIconForm form = new AboutIconForm())
+            {
+                form.ShowDialog();
+            }
+        }
+
+        private void settingToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (SettingsForm form = new SettingsForm())
             {
                 form.ShowDialog();
             }

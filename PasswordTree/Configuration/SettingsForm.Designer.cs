@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("S");
             this.treeView1 = new System.Windows.Forms.TreeView();
             this.label1 = new System.Windows.Forms.Label();
             this.buttonOK = new System.Windows.Forms.Button();
@@ -43,10 +42,6 @@
             // 
             this.treeView1.Location = new System.Drawing.Point(70, 6);
             this.treeView1.Name = "treeView1";
-            treeNode2.Name = "S";
-            treeNode2.Text = "S";
-            this.treeView1.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode2});
             this.treeView1.Size = new System.Drawing.Size(436, 301);
             this.treeView1.TabIndex = 0;
             // 

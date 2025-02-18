@@ -1,12 +1,6 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using System.Xml.Linq;
 
 namespace PasswordTree.Tree_Structure
 {
@@ -93,7 +87,7 @@ namespace PasswordTree.Tree_Structure
 
         public override string ToString()
         {
-            return Data.ToString();
+            return Convert.ToString(Data);
         }
 
         public override bool Equals(object obj)

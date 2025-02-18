@@ -31,12 +31,12 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PasswordGeneratorForm));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.settingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.aboutAppsIconToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.textBoxCurrentPassword = new System.Windows.Forms.TextBox();
             this.buttonGeneratePassword = new System.Windows.Forms.Button();
             this.textBoxPreviousPasswords = new System.Windows.Forms.TextBox();
             this.numericPasswordLength = new System.Windows.Forms.NumericUpDown();
-            this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.aboutAppsIconToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
@@ -59,6 +59,22 @@
             this.settingToolStripMenuItem.Name = "settingToolStripMenuItem";
             this.settingToolStripMenuItem.Size = new System.Drawing.Size(56, 20);
             this.settingToolStripMenuItem.Text = "Setting";
+            this.settingToolStripMenuItem.Click += new System.EventHandler(this.settingToolStripMenuItem_Click);
+            // 
+            // helpToolStripMenuItem
+            // 
+            this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.aboutAppsIconToolStripMenuItem});
+            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
+            this.helpToolStripMenuItem.Text = "Help";
+            // 
+            // aboutAppsIconToolStripMenuItem
+            // 
+            this.aboutAppsIconToolStripMenuItem.Name = "aboutAppsIconToolStripMenuItem";
+            this.aboutAppsIconToolStripMenuItem.Size = new System.Drawing.Size(166, 22);
+            this.aboutAppsIconToolStripMenuItem.Text = "About App\'s Icon";
+            this.aboutAppsIconToolStripMenuItem.Click += new System.EventHandler(this.aboutAppsIconToolStripMenuItem_Click);
             // 
             // textBoxCurrentPassword
             // 
@@ -102,21 +118,6 @@
             0,
             0,
             0});
-            // 
-            // helpToolStripMenuItem
-            // 
-            this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.aboutAppsIconToolStripMenuItem});
-            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
-            this.helpToolStripMenuItem.Text = "Help";
-            // 
-            // aboutAppsIconToolStripMenuItem
-            // 
-            this.aboutAppsIconToolStripMenuItem.Name = "aboutAppsIconToolStripMenuItem";
-            this.aboutAppsIconToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.aboutAppsIconToolStripMenuItem.Text = "About App\'s Icon";
-            this.aboutAppsIconToolStripMenuItem.Click += new System.EventHandler(this.aboutAppsIconToolStripMenuItem_Click);
             // 
             // label2
             // 
