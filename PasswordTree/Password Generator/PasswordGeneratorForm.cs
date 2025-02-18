@@ -1,4 +1,5 @@
-﻿using PasswordTree.Tree_Structure;
+﻿using PasswordTree.Help_Section;
+using PasswordTree.Tree_Structure;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -22,6 +23,14 @@ namespace PasswordTree.Password_Generator
         {
             PasswordGenerator passwordGenerator = new PasswordGenerator(Data.DefaultTree());
             textBoxCurrentPassword.Text += passwordGenerator.Create((int)numericPasswordLength.Value) + "\r\n";
+        }
+
+        private void aboutAppsIconToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (AboutIconForm form = new AboutIconForm())
+            {
+                form.ShowDialog();
+            }
         }
     }
 }
