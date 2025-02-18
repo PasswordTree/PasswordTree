@@ -4,9 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PasswordTree.Password_Generator
+namespace PasswordTree.Configuration
 {
-
     internal static class Settings
     {
         internal static class PasswordCatagory
