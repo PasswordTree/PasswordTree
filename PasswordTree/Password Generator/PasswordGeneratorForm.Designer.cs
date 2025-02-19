@@ -45,6 +45,7 @@
             // 
             // menuStrip1
             // 
+            this.menuStrip1.BackColor = System.Drawing.Color.White;
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.settingToolStripMenuItem,
             this.helpToolStripMenuItem});
@@ -71,15 +72,19 @@
             // 
             // aboutAppsIconToolStripMenuItem
             // 
+            this.aboutAppsIconToolStripMenuItem.BackColor = System.Drawing.Color.White;
             this.aboutAppsIconToolStripMenuItem.Name = "aboutAppsIconToolStripMenuItem";
-            this.aboutAppsIconToolStripMenuItem.Size = new System.Drawing.Size(166, 22);
+            this.aboutAppsIconToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.aboutAppsIconToolStripMenuItem.Text = "About App\'s Icon";
             this.aboutAppsIconToolStripMenuItem.Click += new System.EventHandler(this.aboutAppsIconToolStripMenuItem_Click);
             // 
             // textBoxCurrentPassword
             // 
+            this.textBoxCurrentPassword.BackColor = System.Drawing.Color.White;
             this.textBoxCurrentPassword.Location = new System.Drawing.Point(130, 110);
+            this.textBoxCurrentPassword.MaxLength = 200;
             this.textBoxCurrentPassword.Name = "textBoxCurrentPassword";
+            this.textBoxCurrentPassword.ReadOnly = true;
             this.textBoxCurrentPassword.Size = new System.Drawing.Size(196, 20);
             this.textBoxCurrentPassword.TabIndex = 2;
             // 
@@ -95,15 +100,22 @@
             // 
             // textBoxPreviousPasswords
             // 
+            this.textBoxPreviousPasswords.BackColor = System.Drawing.Color.White;
             this.textBoxPreviousPasswords.Location = new System.Drawing.Point(126, 27);
             this.textBoxPreviousPasswords.Multiline = true;
             this.textBoxPreviousPasswords.Name = "textBoxPreviousPasswords";
+            this.textBoxPreviousPasswords.ReadOnly = true;
             this.textBoxPreviousPasswords.ScrollBars = System.Windows.Forms.ScrollBars.Both;
             this.textBoxPreviousPasswords.Size = new System.Drawing.Size(302, 74);
             this.textBoxPreviousPasswords.TabIndex = 4;
             // 
             // numericPasswordLength
             // 
+            this.numericPasswordLength.Increment = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
             this.numericPasswordLength.Location = new System.Drawing.Point(284, 133);
             this.numericPasswordLength.Maximum = new decimal(new int[] {
             200,
@@ -114,7 +126,7 @@
             this.numericPasswordLength.Size = new System.Drawing.Size(42, 20);
             this.numericPasswordLength.TabIndex = 5;
             this.numericPasswordLength.Value = new decimal(new int[] {
-            30,
+            20,
             0,
             0,
             0});

@@ -19,10 +19,21 @@ namespace PasswordTree.Password_Generator
             InitializeComponent();
         }
 
+        private void Append(string password)
+        {
+            if (!string.IsNullOrEmpty(textBoxCurrentPassword.Text))
+            {
+                textBoxPreviousPasswords.Text += textBoxCurrentPassword.Text + "\r\n";
+            }
+            textBoxCurrentPassword.Text = password;
+
+        }
+
         private void buttonGeneratePassword_Click(object sender, EventArgs e)
         {
             PasswordGenerator passwordGenerator = new PasswordGenerator(Data.DefaultTree());
-            textBoxCurrentPassword.Text += passwordGenerator.Create((int)numericPasswordLength.Value) + "\r\n";
+            string password = passwordGenerator.Create((int)numericPasswordLength.Value);
+            Append(password);
         }
 
         private void aboutAppsIconToolStripMenuItem_Click(object sender, EventArgs e)
