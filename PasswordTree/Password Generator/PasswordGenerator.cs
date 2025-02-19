@@ -24,6 +24,37 @@ namespace PasswordTree.Password_Generator
         public string Create(int passwordLength)
         {
             string password = "";
+            List<TreeNode> previousCat = new List<TreeNode>();
+            var treeLeaves = tree.Leaves();
+
+            int maxPasswordLength = string.Concat(treeLeaves.Select(leaf => leaf.Name)).Length;
+            if (Settings.Password.IsDistinct && passwordLength > maxPasswordLength)
+            {
+                throw new IndexOutOfRangeException("Sum of all selected leaves is less than password length");
+            }
+
+            while (password.Length < passwordLength)
+            {
+                int selectedLeafIndex = random.Next(treeLeaves.Length);
+                TreeNode selectedLeaf = treeLeaves[selectedLeafIndex];
+                TreeNode selectedCat = selectedLeaf.GetParentAt(1);
+
+                if (!previousCat.Contains(selectedCat))
+                {
+                    string value = selectedLeaf.ToString();
+                    char selectedChar = value[random.Next(value.Length)];
+
+                    if (!(Settings.Password.IsDistinct && password.Contains(selectedChar)))
+                    {
+                        password += selectedChar;
+                        previousCat.Add(selectedCat);
+                        if (previousCat.Count > Settings.PasswordCatagory.CuerentLength)
+                        {
+                            previousCat.RemoveAt(0);
+                        }
+                    }
+                }
+            }
             return password;
         }
     }
