@@ -13,12 +13,9 @@ namespace PasswordTree.Password_Generator
         private Random random = new Random();
         private TreeNode tree;
 
-        private int length = 20;
-        public int Length { get => length; set => length = value; }
-       
         public PasswordGenerator(TreeNode tree)
         {
-            this.tree = tree;
+            this.tree = new TreeNode(tree.Text, tree.Nodes.Cast<TreeNode>().ToArray());
         }
 
         public string Create(int passwordLength)

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml.Linq;
 
 namespace PasswordTree.Password_Generator
 {
@@ -60,7 +61,7 @@ namespace PasswordTree.Password_Generator
             {
                 if (!(node.Parent is null))
                 {
-                    bool isAnyChildrenChecked = node.Parent.Nodes.Cast<TreeNode>().Any(x => x.Checked);
+                    bool isAnyChildrenChecked = node.Parent.Nodes.Cast<TreeNode>().Any(x => x.Checked == true);
                     node.Parent.Checked = isAnyChildrenChecked;
                     CheckParent(node.Parent);
                 }
@@ -69,6 +70,54 @@ namespace PasswordTree.Password_Generator
             CheckParent(selectedNode);
 
             cpuCheckedTree = false;
+        }
+
+        public static TreeNode PruneByCheckBoxes(this TreeNode tree)
+        {
+            void PruneNode(TreeNode node)
+            {
+                List<TreeNode> list = new List<TreeNode>();
+                foreach (TreeNode child in node.Nodes)
+                {
+                    if (child.Checked)
+                    {
+                        PruneNode(child);
+                    }
+                    else
+                    {
+                        list.Add(child);
+                    }
+                }
+
+                foreach (TreeNode child in list)
+                {
+                    child.Remove();
+                }
+                if (!node.Checked)
+                {
+                    node.Remove();
+                }
+            }
+            
+            TreeNode prunedTree = tree.Copy();
+            PruneNode(prunedTree);
+            return prunedTree;
+        }
+
+        public static TreeNode Copy(this TreeNode tree)
+        {
+            TreeNode node = new TreeNode()
+            {
+                Name = tree.Name,
+                Checked = tree.Checked,
+                Text = tree.Text
+            };
+
+            foreach (TreeNode child in tree.Nodes)
+            {
+                node.Nodes.Add(child.Copy());
+            }
+           return node;
         }
     }
 }

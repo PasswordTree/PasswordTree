@@ -21,7 +21,7 @@ namespace PasswordTree.Configuration
 
         private void SettingsForm_Load(object sender, EventArgs e)
         {
-            treeView1.Nodes.Add(Data.DefaultTree());
+            treeView1.Nodes.Add(Settings.Password.Tree);
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -39,6 +39,8 @@ namespace PasswordTree.Configuration
             Settings.Password.PreviousPasswordEnabled = checkBoxPreviousPass.Checked;
             Settings.Password.PreviousPasswordCount = (int)numericUpDown1.Value;
             Settings.Password.IsDistinct = checkBoxPasswordDistinct.Checked;
+            Settings.Password.Tree = treeView1.Nodes[0].PruneByCheckBoxes();
+
             Close();
         }
 
