@@ -32,23 +32,26 @@
             this.label1 = new System.Windows.Forms.Label();
             this.buttonOK = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.checkBoxPasswordDistinct = new System.Windows.Forms.CheckBox();
+            this.checkBoxPreviousPass = new System.Windows.Forms.CheckBox();
+            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.button1 = new System.Windows.Forms.Button();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
-            this.checkBoxPreviousPass = new System.Windows.Forms.CheckBox();
             this.tabControl1.SuspendLayout();
-            this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            this.tabPage1.SuspendLayout();
             this.SuspendLayout();
             // 
             // treeView1
             // 
+            this.treeView1.CheckBoxes = true;
             this.treeView1.Location = new System.Drawing.Point(70, 6);
             this.treeView1.Name = "treeView1";
             this.treeView1.Size = new System.Drawing.Size(436, 301);
             this.treeView1.TabIndex = 0;
+            this.treeView1.AfterCheck += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterCheck);
             // 
             // label1
             // 
@@ -80,30 +83,9 @@
             this.tabControl1.Size = new System.Drawing.Size(577, 345);
             this.tabControl1.TabIndex = 14;
             // 
-            // tabPage1
-            // 
-            this.tabPage1.Controls.Add(this.label1);
-            this.tabPage1.Controls.Add(this.treeView1);
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(569, 319);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "Password Decision Tree";
-            this.tabPage1.UseVisualStyleBackColor = true;
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(490, 347);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 15;
-            this.button1.Text = "Cancel";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.checkBoxPasswordDistinct);
             this.tabPage2.Controls.Add(this.checkBoxPreviousPass);
             this.tabPage2.Controls.Add(this.numericUpDown1);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
@@ -113,6 +95,29 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Password Generator";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxPasswordDistinct
+            // 
+            this.checkBoxPasswordDistinct.AutoSize = true;
+            this.checkBoxPasswordDistinct.Location = new System.Drawing.Point(8, 30);
+            this.checkBoxPasswordDistinct.Name = "checkBoxPasswordDistinct";
+            this.checkBoxPasswordDistinct.Size = new System.Drawing.Size(157, 17);
+            this.checkBoxPasswordDistinct.TabIndex = 3;
+            this.checkBoxPasswordDistinct.Text = "Generate Distinct Password";
+            this.checkBoxPasswordDistinct.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxPreviousPass
+            // 
+            this.checkBoxPreviousPass.AutoSize = true;
+            this.checkBoxPreviousPass.Checked = true;
+            this.checkBoxPreviousPass.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBoxPreviousPass.Location = new System.Drawing.Point(8, 7);
+            this.checkBoxPreviousPass.Name = "checkBoxPreviousPass";
+            this.checkBoxPreviousPass.Size = new System.Drawing.Size(158, 17);
+            this.checkBoxPreviousPass.TabIndex = 2;
+            this.checkBoxPreviousPass.Text = "Previous Passwords Count: ";
+            this.checkBoxPreviousPass.UseVisualStyleBackColor = true;
+            this.checkBoxPreviousPass.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
             // numericUpDown1
             // 
@@ -136,18 +141,27 @@
             0,
             0});
             // 
-            // checkBoxPreviousPass
+            // tabPage1
             // 
-            this.checkBoxPreviousPass.AutoSize = true;
-            this.checkBoxPreviousPass.Checked = true;
-            this.checkBoxPreviousPass.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBoxPreviousPass.Location = new System.Drawing.Point(8, 7);
-            this.checkBoxPreviousPass.Name = "checkBoxPreviousPass";
-            this.checkBoxPreviousPass.Size = new System.Drawing.Size(158, 17);
-            this.checkBoxPreviousPass.TabIndex = 2;
-            this.checkBoxPreviousPass.Text = "Previous Passwords Count: ";
-            this.checkBoxPreviousPass.UseVisualStyleBackColor = true;
-            this.checkBoxPreviousPass.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            this.tabPage1.Controls.Add(this.label1);
+            this.tabPage1.Controls.Add(this.treeView1);
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(569, 319);
+            this.tabPage1.TabIndex = 0;
+            this.tabPage1.Text = "Password Decision Tree";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(490, 347);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 15;
+            this.button1.Text = "Cancel";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // SettingsForm
             // 
@@ -166,11 +180,11 @@
             this.Text = "Settings";
             this.Load += new System.EventHandler(this.SettingsForm_Load);
             this.tabControl1.ResumeLayout(false);
-            this.tabPage1.ResumeLayout(false);
-            this.tabPage1.PerformLayout();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+            this.tabPage1.ResumeLayout(false);
+            this.tabPage1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -186,5 +200,6 @@
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.NumericUpDown numericUpDown1;
         private System.Windows.Forms.CheckBox checkBoxPreviousPass;
+        private System.Windows.Forms.CheckBox checkBoxPasswordDistinct;
     }
 }

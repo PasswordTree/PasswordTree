@@ -17,6 +17,7 @@ namespace PasswordTree.Configuration
         {
             InitializeComponent();
         }
+        private bool cpuCheckedTree = false;
 
         private void SettingsForm_Load(object sender, EventArgs e)
         {
@@ -37,8 +38,15 @@ namespace PasswordTree.Configuration
         {
             Settings.Password.PreviousPasswordEnabled = checkBoxPreviousPass.Checked;
             Settings.Password.PreviousPasswordCount = (int)numericUpDown1.Value;
-
+            Settings.Password.IsDistinct = checkBoxPasswordDistinct.Checked;
             Close();
+        }
+
+        private void treeView1_AfterCheck(object sender, TreeViewEventArgs e)
+        {
+            if (cpuCheckedTree) return;
+
+            treeView1.UpdateNodesCheck(e.Node, ref cpuCheckedTree);
         }
     }
 }

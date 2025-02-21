@@ -39,5 +39,36 @@ namespace PasswordTree.Password_Generator
             TreeNode[] nodePath = GetPath(tree).ToArray();
             return nodePath[nodePath.Length - level - 1];
         }
+
+        public static void UpdateNodesCheck(this TreeView tree, TreeNode selectedNode, ref bool cpuCheckedTree)
+        {
+            cpuCheckedTree = true;
+
+            void CheckChildren(TreeNode node)
+            {
+                foreach (TreeNode child in node.Nodes)
+                {
+                    child.Checked = selectedNode.Checked;
+                    CheckChildren(child);
+                }
+            }
+
+            CheckChildren(selectedNode);
+
+
+            void CheckParent(TreeNode node)
+            {
+                if (!(node.Parent is null))
+                {
+                    bool isAnyChildrenChecked = node.Parent.Nodes.Cast<TreeNode>().Any(x => x.Checked);
+                    node.Parent.Checked = isAnyChildrenChecked;
+                    CheckParent(node.Parent);
+                }
+            }
+
+            CheckParent(selectedNode);
+
+            cpuCheckedTree = false;
+        }
     }
 }
