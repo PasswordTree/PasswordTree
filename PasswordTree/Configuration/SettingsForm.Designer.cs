@@ -34,8 +34,13 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.button1 = new System.Windows.Forms.Button();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            this.checkBoxPreviousPass = new System.Windows.Forms.CheckBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
+            this.tabPage2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.SuspendLayout();
             // 
             // treeView1
@@ -62,9 +67,11 @@
             this.buttonOK.TabIndex = 11;
             this.buttonOK.Text = "OK";
             this.buttonOK.UseVisualStyleBackColor = true;
+            this.buttonOK.Click += new System.EventHandler(this.buttonOK_Click);
             // 
             // tabControl1
             // 
+            this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Top;
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
@@ -95,6 +102,53 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // tabPage2
+            // 
+            this.tabPage2.Controls.Add(this.checkBoxPreviousPass);
+            this.tabPage2.Controls.Add(this.numericUpDown1);
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(569, 319);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "Password Generator";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // numericUpDown1
+            // 
+            this.numericUpDown1.Location = new System.Drawing.Point(172, 6);
+            this.numericUpDown1.Maximum = new decimal(new int[] {
+            50,
+            0,
+            0,
+            0});
+            this.numericUpDown1.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericUpDown1.Name = "numericUpDown1";
+            this.numericUpDown1.Size = new System.Drawing.Size(37, 20);
+            this.numericUpDown1.TabIndex = 0;
+            this.numericUpDown1.Value = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
+            // 
+            // checkBoxPreviousPass
+            // 
+            this.checkBoxPreviousPass.AutoSize = true;
+            this.checkBoxPreviousPass.Checked = true;
+            this.checkBoxPreviousPass.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBoxPreviousPass.Location = new System.Drawing.Point(8, 7);
+            this.checkBoxPreviousPass.Name = "checkBoxPreviousPass";
+            this.checkBoxPreviousPass.Size = new System.Drawing.Size(158, 17);
+            this.checkBoxPreviousPass.TabIndex = 2;
+            this.checkBoxPreviousPass.Text = "Previous Passwords Count: ";
+            this.checkBoxPreviousPass.UseVisualStyleBackColor = true;
+            this.checkBoxPreviousPass.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            // 
             // SettingsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -109,11 +163,14 @@
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "SettingsForm";
+            this.Text = "Settings";
             this.Load += new System.EventHandler(this.SettingsForm_Load);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
+            this.tabPage2.ResumeLayout(false);
+            this.tabPage2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -126,5 +183,8 @@
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private System.Windows.Forms.CheckBox checkBoxPreviousPass;
     }
 }

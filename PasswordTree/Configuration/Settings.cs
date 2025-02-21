@@ -18,6 +18,8 @@ namespace PasswordTree.Configuration
         {
             public static int MaximumLength { get; set; }
             public static bool IsDistinct { get; set; }
+            public static bool PreviousPasswordEnabled { get; set; } = true;
+            public static int PreviousPasswordCount { get; set; } = 5;
         }
     }
 }

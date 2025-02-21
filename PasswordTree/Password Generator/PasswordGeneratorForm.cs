@@ -9,31 +9,48 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static PasswordTree.Configuration.Settings;
 
 namespace PasswordTree.Password_Generator
 {
     public partial class PasswordGeneratorForm : Form
     {
+        List<string> previousPasswordList = new List<string>();
+
         public PasswordGeneratorForm()
         {
             InitializeComponent();
         }
 
-        private void Append(string password)
+        private void BeforeAppend()
         {
-            if (!string.IsNullOrEmpty(textBoxCurrentPassword.Text))
+            if (Settings.Password.PreviousPasswordEnabled)
             {
-                textBoxPreviousPasswords.Text += textBoxCurrentPassword.Text + "\r\n";
-            }
-            textBoxCurrentPassword.Text = password;
+                if (!string.IsNullOrEmpty(textBoxCurrentPassword.Text))
+                {
+                    previousPasswordList.Add(textBoxCurrentPassword.Text);
+                }
 
+                if (previousPasswordList.Count > Settings.Password.PreviousPasswordCount)
+                {
+                    previousPasswordList.RemoveAt(0);
+                }
+            }
+        }
+
+        private void AfterAppend()
+        {
+            textBoxPreviousPasswords.Lines = previousPasswordList.ToArray();
         }
 
         private void buttonGeneratePassword_Click(object sender, EventArgs e)
         {
             PasswordGenerator passwordGenerator = new PasswordGenerator(Data.DefaultTree());
             string password = passwordGenerator.Create((int)numericPasswordLength.Value);
-            Append(password);
+
+            BeforeAppend();
+            textBoxCurrentPassword.Text = password;
+            AfterAppend();
         }
 
         private void aboutAppsIconToolStripMenuItem_Click(object sender, EventArgs e)
@@ -51,5 +68,7 @@ namespace PasswordTree.Password_Generator
                 form.ShowDialog();
             }
         }
+
+        
     }
 }

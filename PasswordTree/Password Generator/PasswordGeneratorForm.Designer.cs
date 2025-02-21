@@ -58,8 +58,8 @@
             // settingToolStripMenuItem
             // 
             this.settingToolStripMenuItem.Name = "settingToolStripMenuItem";
-            this.settingToolStripMenuItem.Size = new System.Drawing.Size(56, 20);
-            this.settingToolStripMenuItem.Text = "Setting";
+            this.settingToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
+            this.settingToolStripMenuItem.Text = "Settings";
             this.settingToolStripMenuItem.Click += new System.EventHandler(this.settingToolStripMenuItem_Click);
             // 
             // helpToolStripMenuItem
@@ -74,7 +74,7 @@
             // 
             this.aboutAppsIconToolStripMenuItem.BackColor = System.Drawing.Color.White;
             this.aboutAppsIconToolStripMenuItem.Name = "aboutAppsIconToolStripMenuItem";
-            this.aboutAppsIconToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.aboutAppsIconToolStripMenuItem.Size = new System.Drawing.Size(166, 22);
             this.aboutAppsIconToolStripMenuItem.Text = "About App\'s Icon";
             this.aboutAppsIconToolStripMenuItem.Click += new System.EventHandler(this.aboutAppsIconToolStripMenuItem_Click);
             // 
