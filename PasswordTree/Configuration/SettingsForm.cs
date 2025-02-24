@@ -43,15 +43,15 @@ namespace PasswordTree.Configuration
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
-            numericUpDown1.Enabled = checkBoxPreviousPass.Checked;
+            numericUpDownPreviousPassCounts.Enabled = checkBoxPreviousPass.Checked;
         }
 
         private async void buttonOK_Click(object sender, EventArgs e)
         {
             Settings.Password.PreviousPasswordEnabled = checkBoxPreviousPass.Checked;
-            Settings.Password.PreviousPasswordCount = (int)numericUpDown1.Value;
+            Settings.Password.PreviousPasswordCount = (int)numericUpDownPreviousPassCounts.Value;
+            Settings.PasswordCatagory.CurrentLength = (int)numericUpDownSelectionCooldown.Value;
             Settings.Password.IsDistinct = checkBoxPasswordDistinct.Checked;
-            Settings.PasswordCatagory.CurrentLength = 0;
 
             TreeNode tree = treeView1.Nodes[0];
             await Settings.Password.WriteJson(tree);
@@ -66,7 +66,5 @@ namespace PasswordTree.Configuration
 
             treeView1.UpdateNodesCheck(e.Node, ref cpuCheckedTree);
         }
-
-        
     }
 }
