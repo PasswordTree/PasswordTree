@@ -36,7 +36,7 @@ namespace PasswordTree.Configuration
             treeView1.Nodes.Add(Settings.Password.Tree);
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void buttonCancel_Click(object sender, EventArgs e)
         {
             Close();
         }
@@ -46,13 +46,16 @@ namespace PasswordTree.Configuration
             numericUpDown1.Enabled = checkBoxPreviousPass.Checked;
         }
 
-        private void buttonOK_Click(object sender, EventArgs e)
+        private async void buttonOK_Click(object sender, EventArgs e)
         {
             Settings.Password.PreviousPasswordEnabled = checkBoxPreviousPass.Checked;
             Settings.Password.PreviousPasswordCount = (int)numericUpDown1.Value;
             Settings.Password.IsDistinct = checkBoxPasswordDistinct.Checked;
-            Settings.Password.Tree = treeView1.Nodes[0].PruneByCheckBoxes();
             Settings.PasswordCatagory.CurrentLength = 0;
+
+            TreeNode tree = treeView1.Nodes[0];
+            await Settings.Password.WriteJson(tree);
+            Settings.Password.Tree = tree.PruneByCheckBoxes();
 
             Close();
         }
