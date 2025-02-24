@@ -22,7 +22,8 @@ namespace PasswordTree.Password_Generator
                 return leaves;
             }
 
-            return DFS(tree).Where(node => node.Nodes.Count == 0).ToArray();
+            var temp = DFS(tree);
+            return temp.Where(node => node.Nodes.Count == 0).ToArray();
         }
 
         public static TreeNode GetParentAt(this TreeNode tree, int level)
@@ -45,6 +46,18 @@ namespace PasswordTree.Password_Generator
         {
             cpuCheckedTree = true;
 
+            TraverseCheckBoxNode(selectedNode);
+
+            cpuCheckedTree = false;
+        }
+
+        public static void UpdateNodesCheck(this TreeNode selectedNode)
+        {
+            TraverseCheckBoxNode(selectedNode);
+        }
+
+        private static void TraverseCheckBoxNode(TreeNode selectedNode)
+        {
             void CheckChildren(TreeNode node)
             {
                 foreach (TreeNode child in node.Nodes)
@@ -53,7 +66,6 @@ namespace PasswordTree.Password_Generator
                     CheckChildren(child);
                 }
             }
-
             CheckChildren(selectedNode);
 
 
@@ -66,10 +78,7 @@ namespace PasswordTree.Password_Generator
                     CheckParent(node.Parent);
                 }
             }
-
             CheckParent(selectedNode);
-
-            cpuCheckedTree = false;
         }
 
         public static TreeNode PruneByCheckBoxes(this TreeNode tree)
