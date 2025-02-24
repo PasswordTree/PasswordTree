@@ -22,17 +22,6 @@ namespace PasswordTree.Configuration
 
         private async void SettingsForm_Load(object sender, EventArgs e)
         {
-            TreeNode tree;
-            try
-            {
-                tree = await Settings.Password.Read();
-            }
-            catch (Exception)
-            {
-                tree = Data.DefaultTree();
-            }
-
-            Settings.Password.Tree = tree;
             treeView1.Nodes.Add(Settings.Password.Tree);
         }
 
@@ -54,8 +43,7 @@ namespace PasswordTree.Configuration
             Settings.Password.IsDistinct = checkBoxPasswordDistinct.Checked;
 
             TreeNode tree = treeView1.Nodes[0];
-            await Settings.Password.WriteJson(tree);
-            Settings.Password.Tree = tree.PruneByCheckBoxes();
+            Settings.Password.Tree = tree;
 
             Close();
         }

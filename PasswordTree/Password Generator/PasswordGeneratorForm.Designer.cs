@@ -166,6 +166,8 @@
             this.Name = "PasswordGeneratorForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Password Generator";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.PasswordGeneratorForm_FormClosing);
+            this.Load += new System.EventHandler(this.PasswordGeneratorForm_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericPasswordLength)).EndInit();

@@ -16,7 +16,7 @@ namespace PasswordTree.Password_Generator
         {
             string password = "";
             List<TreeNode> previousCat = new List<TreeNode>();
-            var leaves = Settings.Password.Tree.Leaves();
+            var prunedLeaves = Settings.Password.Tree.PruneByCheckBoxes().Leaves();
 
             if (Settings.Password.IsDistinct && passwordLength > Settings.Password.MaximumLength)
             {
@@ -25,8 +25,8 @@ namespace PasswordTree.Password_Generator
 
             while (password.Length < passwordLength)
             {
-                int randomLeafIndex = random.Next(leaves.Length);
-                TreeNode selectedLeaf = leaves[randomLeafIndex];
+                int randomLeafIndex = random.Next(prunedLeaves.Length);
+                TreeNode selectedLeaf = prunedLeaves[randomLeafIndex];
                 TreeNode selectedCat = selectedLeaf.GetParentAt(1);
 
                 if (!previousCat.Contains(selectedCat))

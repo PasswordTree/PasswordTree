@@ -22,6 +22,26 @@ namespace PasswordTree.Password_Generator
             InitializeComponent();
         }
 
+        private async void PasswordGeneratorForm_Load(object sender, EventArgs e)
+        {
+            TreeNode tree;
+            try
+            {
+                tree = await Settings.Password.Read();
+            }
+            catch (Exception)
+            {
+                tree = Data.DefaultTree();
+            }
+
+            Settings.Password.Tree = tree;
+        }
+
+        private async void PasswordGeneratorForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            await Settings.Password.WriteJson(Settings.Password.Tree);
+        }
+
         private void BeforeAppend()
         {
             if (Settings.Password.PreviousPasswordEnabled)
@@ -68,7 +88,5 @@ namespace PasswordTree.Password_Generator
                 form.ShowDialog();
             }
         }
-
-        
     }
 }
