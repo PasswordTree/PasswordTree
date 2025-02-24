@@ -13,14 +13,26 @@ namespace PasswordTree.Configuration
 {
     public partial class SettingsForm : Form
     {
+        private bool cpuCheckedTree = false;
+
         public SettingsForm()
         {
             InitializeComponent();
         }
-        private bool cpuCheckedTree = false;
 
-        private void SettingsForm_Load(object sender, EventArgs e)
+        private async void SettingsForm_Load(object sender, EventArgs e)
         {
+            TreeNode tree;
+            try
+            {
+                tree = await Settings.Password.Read();
+            }
+            catch (Exception)
+            {
+                tree = Data.DefaultTree();
+            }
+
+            Settings.Password.Tree = tree;
             treeView1.Nodes.Add(Settings.Password.Tree);
         }
 
@@ -40,6 +52,7 @@ namespace PasswordTree.Configuration
             Settings.Password.PreviousPasswordCount = (int)numericUpDown1.Value;
             Settings.Password.IsDistinct = checkBoxPasswordDistinct.Checked;
             Settings.Password.Tree = treeView1.Nodes[0].PruneByCheckBoxes();
+            Settings.PasswordCatagory.CurrentLength = 0;
 
             Close();
         }
@@ -50,5 +63,7 @@ namespace PasswordTree.Configuration
 
             treeView1.UpdateNodesCheck(e.Node, ref cpuCheckedTree);
         }
+
+        
     }
 }
