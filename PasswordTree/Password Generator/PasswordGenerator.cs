@@ -11,29 +11,22 @@ namespace PasswordTree.Password_Generator
     internal class PasswordGenerator
     {
         private Random random = new Random();
-        private TreeNode tree;
-
-        public PasswordGenerator(TreeNode tree)
-        {
-            this.tree = new TreeNode(tree.Text, tree.Nodes.Cast<TreeNode>().ToArray());
-        }
 
         public string Create(int passwordLength)
         {
             string password = "";
             List<TreeNode> previousCat = new List<TreeNode>();
-            var treeLeaves = tree.Leaves();
+            var prunedLeaves = Settings.Password.Tree.PruneByCheckBoxes().Leaves();
 
-            int maxPasswordLength = string.Concat(treeLeaves.Select(leaf => leaf.Name)).Length;
-            if (Settings.Password.IsDistinct && passwordLength > maxPasswordLength)
+            if (Settings.Password.IsDistinct && passwordLength > Settings.Password.MaximumLength)
             {
-                throw new IndexOutOfRangeException("Sum of all selected leaves is less than password length");
+                throw new ArgumentOutOfRangeException("Sum of all selected leaves is less than password length");
             }
 
             while (password.Length < passwordLength)
             {
-                int selectedLeafIndex = random.Next(treeLeaves.Length);
-                TreeNode selectedLeaf = treeLeaves[selectedLeafIndex];
+                int randomLeafIndex = random.Next(prunedLeaves.Length);
+                TreeNode selectedLeaf = prunedLeaves[randomLeafIndex];
                 TreeNode selectedCat = selectedLeaf.GetParentAt(1);
 
                 if (!previousCat.Contains(selectedCat))
@@ -45,7 +38,7 @@ namespace PasswordTree.Password_Generator
                     {
                         password += selectedChar;
                         previousCat.Add(selectedCat);
-                        if (previousCat.Count > Settings.PasswordCatagory.CuerentLength)
+                        if (previousCat.Count > Settings.PasswordCatagory.CurrentLength)
                         {
                             previousCat.RemoveAt(0);
                         }

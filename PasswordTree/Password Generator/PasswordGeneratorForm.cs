@@ -45,7 +45,7 @@ namespace PasswordTree.Password_Generator
 
         private void buttonGeneratePassword_Click(object sender, EventArgs e)
         {
-            PasswordGenerator passwordGenerator = new PasswordGenerator(Data.DefaultTree());
+            PasswordGenerator passwordGenerator = new PasswordGenerator();
             string password = passwordGenerator.Create((int)numericPasswordLength.Value);
 
             BeforeAppend();
