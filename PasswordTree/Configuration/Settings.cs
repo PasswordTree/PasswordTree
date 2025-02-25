@@ -44,9 +44,9 @@ namespace PasswordTree.Configuration
             private static string path = "Password_Tree.json";
             public static int MaximumLength { get => string.Concat(Tree.PruneByCheckBoxes().Leaves().Select(leaf => leaf.Name)).Length; }
             public static TreeNode Tree { get; set; }
-            public static bool IsDistinct { get; set; } = false;
-            public static bool PreviousPasswordEnabled { get; set; } = true;
-            public static int PreviousPasswordCount { get; set; } = 5;
+            public static bool IsDistinct { get; set; }
+            public static bool PreviousPasswordEnabled { get; set; }
+            public static int PreviousPasswordCount { get; set; }
 
             public static async Task<bool> Read()
             {

@@ -22,6 +22,7 @@ namespace PasswordTree.Password_Generator
         public PasswordGeneratorForm()
         {
             InitializeComponent();
+           
         }
 
         private async void PasswordGeneratorForm_Load(object sender, EventArgs e)
@@ -97,6 +98,17 @@ namespace PasswordTree.Password_Generator
             {
                 form.ShowDialog();
             }
+            numericUpDownSelectionCooldown.Maximum = Settings.PasswordCatagory.MaximumLength;
+        }
+
+        private void checkBoxPasswordDistinct_CheckedChanged(object sender, EventArgs e)
+        {
+            Settings.Password.IsDistinct = checkBoxPasswordDistinct.Checked;
+        }
+
+        private void numericUpDownSelectionCooldown_ValueChanged(object sender, EventArgs e)
+        {
+            Settings.PasswordCatagory.CurrentLength = (int)numericUpDownSelectionCooldown.Value;
         }
     }
 }

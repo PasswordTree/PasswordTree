@@ -39,8 +39,6 @@ namespace PasswordTree.Configuration
         {
             Settings.Password.PreviousPasswordEnabled = checkBoxPreviousPass.Checked;
             Settings.Password.PreviousPasswordCount = (int)numericUpDownPreviousPassCounts.Value;
-            Settings.PasswordCatagory.CurrentLength = (int)numericUpDownSelectionCooldown.Value;
-            Settings.Password.IsDistinct = checkBoxPasswordDistinct.Checked;
 
             TreeNode tree = treeView1.Nodes[0];
             Settings.Password.Tree = tree;

@@ -39,8 +39,13 @@
             this.numericPasswordLength = new System.Windows.Forms.NumericUpDown();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.numericUpDownSelectionCooldown = new System.Windows.Forms.NumericUpDown();
+            this.checkBoxPasswordDistinct = new System.Windows.Forms.CheckBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericPasswordLength)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownSelectionCooldown)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -81,7 +86,7 @@
             // textBoxCurrentPassword
             // 
             this.textBoxCurrentPassword.BackColor = System.Drawing.Color.White;
-            this.textBoxCurrentPassword.Location = new System.Drawing.Point(130, 110);
+            this.textBoxCurrentPassword.Location = new System.Drawing.Point(130, 107);
             this.textBoxCurrentPassword.MaxLength = 200;
             this.textBoxCurrentPassword.Name = "textBoxCurrentPassword";
             this.textBoxCurrentPassword.ReadOnly = true;
@@ -90,7 +95,7 @@
             // 
             // buttonGeneratePassword
             // 
-            this.buttonGeneratePassword.Location = new System.Drawing.Point(130, 133);
+            this.buttonGeneratePassword.Location = new System.Drawing.Point(251, 136);
             this.buttonGeneratePassword.Name = "buttonGeneratePassword";
             this.buttonGeneratePassword.Size = new System.Drawing.Size(75, 23);
             this.buttonGeneratePassword.TabIndex = 3;
@@ -116,7 +121,7 @@
             0,
             0,
             0});
-            this.numericPasswordLength.Location = new System.Drawing.Point(284, 133);
+            this.numericPasswordLength.Location = new System.Drawing.Point(125, 159);
             this.numericPasswordLength.Maximum = new decimal(new int[] {
             200,
             0,
@@ -143,17 +148,75 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 27);
+            this.label1.Location = new System.Drawing.Point(12, 30);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(108, 13);
             this.label1.TabIndex = 7;
             this.label1.Text = "Previous Passwords: ";
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(12, 135);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(107, 13);
+            this.label3.TabIndex = 20;
+            this.label3.Text = "Selection Cooldown: ";
+            // 
+            // numericUpDownSelectionCooldown
+            // 
+            this.numericUpDownSelectionCooldown.Location = new System.Drawing.Point(125, 133);
+            this.numericUpDownSelectionCooldown.Maximum = new decimal(new int[] {
+            50,
+            0,
+            0,
+            0});
+            this.numericUpDownSelectionCooldown.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericUpDownSelectionCooldown.Name = "numericUpDownSelectionCooldown";
+            this.numericUpDownSelectionCooldown.Size = new System.Drawing.Size(37, 20);
+            this.numericUpDownSelectionCooldown.TabIndex = 19;
+            this.numericUpDownSelectionCooldown.Value = new decimal(new int[] {
+            2,
+            0,
+            0,
+            0});
+            this.numericUpDownSelectionCooldown.ValueChanged += new System.EventHandler(this.numericUpDownSelectionCooldown_ValueChanged);
+            // 
+            // checkBoxPasswordDistinct
+            // 
+            this.checkBoxPasswordDistinct.AutoSize = true;
+            this.checkBoxPasswordDistinct.Checked = true;
+            this.checkBoxPasswordDistinct.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBoxPasswordDistinct.Location = new System.Drawing.Point(332, 109);
+            this.checkBoxPasswordDistinct.Name = "checkBoxPasswordDistinct";
+            this.checkBoxPasswordDistinct.Size = new System.Drawing.Size(61, 17);
+            this.checkBoxPasswordDistinct.TabIndex = 18;
+            this.checkBoxPasswordDistinct.Text = "Distinct";
+            this.checkBoxPasswordDistinct.UseVisualStyleBackColor = true;
+            this.checkBoxPasswordDistinct.CheckedChanged += new System.EventHandler(this.checkBoxPasswordDistinct_CheckedChanged);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(12, 161);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(95, 13);
+            this.label4.TabIndex = 21;
+            this.label4.Text = "Password Length: ";
+            // 
             // PasswordGeneratorForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(434, 159);
+            this.ClientSize = new System.Drawing.Size(434, 185);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.numericUpDownSelectionCooldown);
+            this.Controls.Add(this.checkBoxPasswordDistinct);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.numericPasswordLength);
@@ -161,8 +224,10 @@
             this.Controls.Add(this.buttonGeneratePassword);
             this.Controls.Add(this.textBoxCurrentPassword);
             this.Controls.Add(this.menuStrip1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
+            this.MaximizeBox = false;
             this.Name = "PasswordGeneratorForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Password Generator";
@@ -171,6 +236,7 @@
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericPasswordLength)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownSelectionCooldown)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -188,5 +254,9 @@
         private System.Windows.Forms.ToolStripMenuItem aboutAppsIconToolStripMenuItem;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.CheckBox checkBoxPasswordDistinct;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.NumericUpDown numericUpDownSelectionCooldown;
     }
 }
