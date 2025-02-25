@@ -1,10 +1,12 @@
-﻿using PasswordTree.Configuration;
+﻿using Newtonsoft.Json;
+using PasswordTree.Configuration;
 using PasswordTree.Help_Section;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,22 +26,30 @@ namespace PasswordTree.Password_Generator
 
         private async void PasswordGeneratorForm_Load(object sender, EventArgs e)
         {
-            TreeNode tree;
             try
             {
-                tree = await Settings.Password.Read();
+                bool isSuccesful = await Settings.Password.Read();
+                if (!isSuccesful) throw new FileLoadException();
             }
-            catch (Exception)
+            catch (Exception error)
             {
-                tree = Data.DefaultTree();
+                if (error is FileNotFoundException || error is FileLoadException || error is JsonReaderException)
+                {
+                    MessageBox.Show("Tree is not complete\nDon't worry, we assigned default Tree",
+                                    "Data Interruption", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    TreeNode tree = Data.DefaultTree();
+                    Settings.Password.Tree = tree;
+                }
+                else
+                {
+                    MessageBox.Show(error.Message, "Error Occurred", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
-
-            Settings.Password.Tree = tree;
         }
 
-        private async void PasswordGeneratorForm_FormClosing(object sender, FormClosingEventArgs e)
+        private void PasswordGeneratorForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            await Settings.Password.WriteJson(Settings.Password.Tree);
+            Settings.Password.WriteJson();
         }
 
         private void BeforeAppend()

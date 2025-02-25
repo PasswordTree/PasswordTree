@@ -1,14 +1,17 @@
 ﻿using Newtonsoft.Json;
 using PasswordTree.Password_Generator;
+using PasswordTree.Properties;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Runtime;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using static PasswordTree.Configuration.Settings;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace PasswordTree.Configuration
 {
@@ -45,32 +48,28 @@ namespace PasswordTree.Configuration
             public static bool PreviousPasswordEnabled { get; set; } = true;
             public static int PreviousPasswordCount { get; set; } = 5;
 
-            public static async Task<TreeNode> Read()
+            public static async Task<bool> Read()
             {
                 if (!File.Exists(path)) throw new FileNotFoundException($"File dosen't exist at {path}");
 
                 FileInfo fileInfo = new FileInfo(path);
-                if (fileInfo.Length != 0) throw new FileLoadException($"Can't load file at {path}");
+                if (fileInfo.Length == 0) throw new FileLoadException($"Can't load file at {path}");
+
                 using (StreamReader sr = new StreamReader(path))
                 {
-                    string jsonText = await sr.ReadToEndAsync();
-                    TreeNode result = JsonConvert.DeserializeObject<TreeNode>(jsonText);
-                    return result;
+                    string json = await sr.ReadToEndAsync();
+                    TreeNode tree = JsonConvert.DeserializeObject<TreeNode>(json, TreeNodeConverterCustom.SerializerSettings());
+                    Tree = tree;
+                    return true;
                 }
             }
 
-            public static async Task WriteJson(TreeNode node)
+            public static void WriteJson()
             {
-                if (node is null) throw new ArgumentNullException("Given Tree is null!");
-                
-                string text = "";
-                string serializedData = JsonConvert.SerializeObject(node, Formatting.Indented);
-                text = serializedData;
+                if (Tree is null) throw new ArgumentNullException("Given Tree is null!");
 
-                using (StreamWriter sw = new StreamWriter(path))
-                {
-                    await sw.WriteLineAsync(text);
-                }
+                string text = JsonConvert.SerializeObject(Tree, TreeNodeConverterCustom.SerializerSettings());
+                File.WriteAllText(path, text);
             }
         }
     }

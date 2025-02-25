@@ -20,7 +20,7 @@ namespace PasswordTree.Configuration
             InitializeComponent();
         }
 
-        private async void SettingsForm_Load(object sender, EventArgs e)
+        private void SettingsForm_Load(object sender, EventArgs e)
         {
             treeView1.Nodes.Add(Settings.Password.Tree);
         }
@@ -35,7 +35,7 @@ namespace PasswordTree.Configuration
             numericUpDownPreviousPassCounts.Enabled = checkBoxPreviousPass.Checked;
         }
 
-        private async void buttonOK_Click(object sender, EventArgs e)
+        private void buttonOK_Click(object sender, EventArgs e)
         {
             Settings.Password.PreviousPasswordEnabled = checkBoxPreviousPass.Checked;
             Settings.Password.PreviousPasswordCount = (int)numericUpDownPreviousPassCounts.Value;
