@@ -21,7 +21,8 @@ namespace PasswordTree.Configuration
 {
     public class SettingsAttributes
     {
-        public int CurrentLength { get; set; }
+        public int PasswordCatagoryCurrentLength { get; set; }
+        public int PasswordCurrentLength { get; set; }
         public bool IsDistinct { get; set; }
         public bool PreviousPasswordEnabled { get; set; }
         public int PreviousPasswordCount { get; set; }
@@ -55,8 +56,9 @@ namespace PasswordTree.Configuration
 
         internal static class Password
         {
-            private static string treePath = "PasswordTree.json";
+            private static string pathTree = "PasswordTree.json";
             public static int MaximumLength { get => string.Concat(Tree.PruneByCheckBoxes().Leaves().Select(leaf => leaf.Text)).Length; }
+            public static int CurrentLength { get; set; } = 20;
             public static TreeNode Tree { get; set; }
             public static bool IsDistinct { get; set; } = true;
             public static bool PreviousPasswordEnabled { get; set; } = true;
@@ -64,12 +66,12 @@ namespace PasswordTree.Configuration
 
             public static async Task<bool> Read()
             {
-                if (!File.Exists(treePath)) throw new FileNotFoundException($"File dosen't exist at {treePath}");
+                if (!File.Exists(pathTree)) throw new FileNotFoundException($"File dosen't exist at {pathTree}");
 
-                FileInfo fileInfo = new FileInfo(treePath);
-                if (fileInfo.Length == 0) throw new FileLoadException($"Can't load file at {treePath}");
+                FileInfo fileInfo = new FileInfo(pathTree);
+                if (fileInfo.Length == 0) throw new FileLoadException($"Can't load file at {pathTree}");
 
-                using (StreamReader sr = new StreamReader(treePath))
+                using (StreamReader sr = new StreamReader(pathTree))
                 {
                     string json = await sr.ReadToEndAsync();
                     TreeNode tree = JsonConvert.DeserializeObject<TreeNode>(json, TreeNodeConverterCustom.SerializerSettings());
@@ -83,17 +85,25 @@ namespace PasswordTree.Configuration
                 if (Tree is null) throw new ArgumentNullException("Given Tree is null!");
 
                 string text = JsonConvert.SerializeObject(Tree, TreeNodeConverterCustom.SerializerSettings());
-                File.WriteAllText(treePath, text);
+                File.WriteAllText(pathTree, text);
                 return true;
             }
         }
 
         public static bool Read()
         {
+            if (!File.Exists(pathAtt)) throw new FileNotFoundException($"File dosen't exist at {pathAtt}");
+
             var serializer = new XmlSerializer(typeof(SettingsAttributes));
             using (var stream = new FileStream(pathAtt, FileMode.Open))
             {
-                var a =serializer.Deserialize(stream);
+                SettingsAttributes a = (SettingsAttributes)serializer.Deserialize(stream);
+
+                PasswordCatagory.CurrentLength = a.PasswordCatagoryCurrentLength;
+                Password.CurrentLength = a.PasswordCurrentLength;
+                Password.IsDistinct = a.IsDistinct;
+                Password.PreviousPasswordEnabled = a.PreviousPasswordEnabled;
+                Password.PreviousPasswordCount = a.PreviousPasswordCount;
             }
             return true;
         }
@@ -102,7 +112,8 @@ namespace PasswordTree.Configuration
         {
            SettingsAttributes settings = new SettingsAttributes()
            {
-               CurrentLength = PasswordCatagory.CurrentLength,
+               PasswordCatagoryCurrentLength = PasswordCatagory.CurrentLength,
+               PasswordCurrentLength = Password.CurrentLength,
                IsDistinct = Password.IsDistinct,
                PreviousPasswordEnabled = Password.PreviousPasswordEnabled,
                PreviousPasswordCount = Password.PreviousPasswordCount

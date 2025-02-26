@@ -135,6 +135,7 @@
             0,
             0,
             0});
+            this.numericPasswordLength.ValueChanged += new System.EventHandler(this.numericPasswordLength_ValueChanged);
             // 
             // label2
             // 
@@ -168,11 +169,6 @@
             this.numericUpDownSelectionCooldown.Location = new System.Drawing.Point(125, 133);
             this.numericUpDownSelectionCooldown.Maximum = new decimal(new int[] {
             50,
-            0,
-            0,
-            0});
-            this.numericUpDownSelectionCooldown.Minimum = new decimal(new int[] {
-            1,
             0,
             0,
             0});

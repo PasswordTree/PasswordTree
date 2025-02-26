@@ -29,34 +29,53 @@ namespace PasswordTree.Password_Generator
             try
             {
                 bool isSuccesful = await Settings.Password.Read();
-                if (!isSuccesful) throw new Exception();
-            }
-            catch (Exception error) when (error is FileNotFoundException || error is FileLoadException || error is JsonReaderException)
-            {
-                MessageBox.Show("Tree is not complete\nUsing default Tree...", "Data Interruption", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
-                TreeNode tree = Data.DefaultTree();
-                Settings.Password.Tree = tree;
+                if (!isSuccesful) throw new Exception("Reading Tree, failed");
             }
             catch (Exception error)
             {
-                MessageBox.Show(error.Message, "Error Occurred", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                Close();
-            }   
+                if (error is FileNotFoundException)
+                {
+                    MessageBox.Show(error.Message, "Tree File, Not Found", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else if (error is FileLoadException)
+                {
+                    MessageBox.Show(error.Message, "Loading Tree File, Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else if (error is JsonReaderException)
+                {
+                    MessageBox.Show(error.Message, "Loading JSON, Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else
+                {
+                    MessageBox.Show(error.Message, "Error Occurred", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
+                Settings.Password.Tree = Data.DefaultTree();
+                MessageBox.Show("App is using default Tree...", "No Worries", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
 
             try
             {
                 bool isSuccesful = Settings.Read();
-                if (!isSuccesful) throw new Exception();
+                if (!isSuccesful) throw new Exception("Reading config file, failed");
             }
             catch (Exception error)
             {
-                MessageBox.Show(error.Message, "Error Occurred", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                if (error is FileNotFoundException)
+                {
+                    MessageBox.Show(error.Message, "Config File, Not Found", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else
+                {
+                    MessageBox.Show(error.Message, "Error Occurred", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                MessageBox.Show("App is using default Settings...", "No Worries", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
 
             checkBoxPasswordDistinct.Checked = Settings.Password.IsDistinct;
             numericUpDownSelectionCooldown.Maximum = Settings.PasswordCatagory.MaximumLength;
             numericUpDownSelectionCooldown.Value = Settings.PasswordCatagory.CurrentLength;
+            numericPasswordLength.Value = Settings.Password.CurrentLength;
         }
 
         private void PasswordGeneratorForm_FormClosing(object sender, FormClosingEventArgs e)
@@ -64,21 +83,21 @@ namespace PasswordTree.Password_Generator
             try
             {
                 bool isSuccesful = Settings.Password.Write();
-                if (!isSuccesful) throw new Exception();
+                if (!isSuccesful) throw new Exception("App couldn't save Tree!");
             }
-            catch (Exception)
+            catch (Exception error)
             {
-                MessageBox.Show("Password couldn't save tree!", "Save Issue", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(error.Message, "Saving Tree, Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
             try
             {
                 bool isSuccesful = Settings.Write();
-                if (!isSuccesful) throw new Exception();
+                if (!isSuccesful) throw new Exception("App couldn't save config file!");
             }
-            catch (Exception)
+            catch (Exception error)
             {
-                MessageBox.Show("Settings couldn't save attributes!", "Save Issue", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(error.Message, "Saving Config File, Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -149,6 +168,11 @@ namespace PasswordTree.Password_Generator
         private void numericUpDownSelectionCooldown_ValueChanged(object sender, EventArgs e)
         {
             Settings.PasswordCatagory.CurrentLength = (int)numericUpDownSelectionCooldown.Value;
+        }
+
+        private void numericPasswordLength_ValueChanged(object sender, EventArgs e)
+        {
+            Settings.Password.CurrentLength = (int)numericPasswordLength.Value;
         }
     }
 }
