@@ -105,12 +105,23 @@ namespace PasswordTree.Password_Generator
 
         private void buttonGeneratePassword_Click(object sender, EventArgs e)
         {
-            PasswordGenerator passwordGenerator = new PasswordGenerator();
-            string password = passwordGenerator.Create((int)numericPasswordLength.Value);
+            try
+            {
+                PasswordGenerator passwordGenerator = new PasswordGenerator();
+                string password = passwordGenerator.Create((int)numericPasswordLength.Value);
 
-            BeforeAppend();
-            textBoxCurrentPassword.Text = password;
-            AfterAppend();
+                BeforeAppend();
+                textBoxCurrentPassword.Text = password;
+                AfterAppend();
+            }
+            catch (ArgumentOutOfRangeException error)
+            {
+                MessageBox.Show(error.Message, "Can't Generate", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (Exception error)
+            {
+                MessageBox.Show(error.Message, "Somthing went wrong", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void aboutAppsIconToolStripMenuItem_Click(object sender, EventArgs e)
