@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -143,14 +144,6 @@ namespace PasswordTree.Password_Generator
             }
         }
 
-        private void aboutAppsIconToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            using (AboutIconForm form = new AboutIconForm())
-            {
-                form.ShowDialog();
-            }
-        }
-
         private void settingToolStripMenuItem_Click(object sender, EventArgs e)
         {
             using (SettingsForm form = new SettingsForm())
@@ -179,6 +172,20 @@ namespace PasswordTree.Password_Generator
         private void numericPasswordLength_ValueChanged(object sender, EventArgs e)
         {
             Settings.Password.CurrentLength = (int)numericPasswordLength.Value;
+        }
+
+        private void sourceCodeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string link = @"https://github.com/PasswordTree/PasswordTree";
+            Process.Start(link);
+        }
+
+        private void iconToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (AboutIconForm form = new AboutIconForm())
+            {
+                form.ShowDialog();
+            }
         }
     }
 }
