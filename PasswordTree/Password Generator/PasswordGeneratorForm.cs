@@ -157,7 +157,13 @@ namespace PasswordTree.Password_Generator
             {
                 form.ShowDialog();
             }
-            numericUpDownSelectionCooldown.Maximum = Settings.PasswordCatagory.MaximumLength;
+            int maxCatLen = Settings.PasswordCatagory.MaximumLength;
+
+            numericUpDownSelectionCooldown.Maximum = maxCatLen;
+            if (numericUpDownSelectionCooldown.Value > maxCatLen)
+            {
+                numericUpDownSelectionCooldown.Value = maxCatLen;
+            }
         }
 
         private void checkBoxPasswordDistinct_CheckedChanged(object sender, EventArgs e)

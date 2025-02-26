@@ -22,7 +22,9 @@ namespace PasswordTree.Configuration
 
         private void SettingsForm_Load(object sender, EventArgs e)
         {
-            treeView1.Nodes.Add(Settings.Password.Tree);
+            treeView1.Nodes.Add(Settings.Password.Tree.Copy());
+            checkBoxPreviousPass.Checked = Settings.Password.PreviousPasswordEnabled;
+            numericUpDownPreviousPassCounts.Value = Settings.Password.PreviousPasswordCount;
         }
 
         private void buttonCancel_Click(object sender, EventArgs e)
@@ -37,11 +39,15 @@ namespace PasswordTree.Configuration
 
         private void buttonOK_Click(object sender, EventArgs e)
         {
+            if (Settings.PasswordCatagory.GetMaxCatLen(treeView1.Nodes[0]) < 0)
+            {
+                MessageBox.Show("Please select at least one leaf", "Node Selection Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
             Settings.Password.PreviousPasswordEnabled = checkBoxPreviousPass.Checked;
             Settings.Password.PreviousPasswordCount = (int)numericUpDownPreviousPassCounts.Value;
 
-            TreeNode tree = treeView1.Nodes[0];
-            Settings.Password.Tree = tree;
+            Settings.Password.Tree = treeView1.Nodes[0];
 
             Close();
         }

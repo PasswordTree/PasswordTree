@@ -36,7 +36,7 @@ namespace PasswordTree.Configuration
         {
             private static int currentLength = 1;
 
-            public static int MaximumLength { get => Password.Tree.PruneByCheckBoxes().Nodes.Count - 1; }
+            public static int MaximumLength { get => GetMaxCatLen(Password.Tree); }
             public static int CurrentLength
             {
                 get
@@ -51,6 +51,10 @@ namespace PasswordTree.Configuration
                     }
                     currentLength = value;
                 }
+            }
+            public static int GetMaxCatLen(TreeNode tree)
+            {
+                return tree.PruneByCheckBoxes().Nodes.Count - 1;
             }
         }
 
