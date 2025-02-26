@@ -18,9 +18,11 @@ namespace PasswordTree.Password_Generator
             List<TreeNode> previousCat = new List<TreeNode>();
             var prunedLeaves = Settings.Password.Tree.PruneByCheckBoxes().Leaves();
 
-            if (Settings.Password.IsDistinct && passwordLength > Settings.Password.MaximumLength)
+            int maxPassLength = Settings.Password.MaximumLength;
+            if (Settings.Password.IsDistinct && passwordLength > maxPassLength)
             {
-                throw new ArgumentOutOfRangeException("Sum of all selected leaves is less than password length");
+                throw new ArgumentOutOfRangeException("Sum of all selected leaves is less than password length\n" +
+                                                      $"Max length based on selected nodes: {maxPassLength}");
             }
 
             while (password.Length < passwordLength)

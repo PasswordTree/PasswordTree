@@ -22,7 +22,6 @@ namespace PasswordTree.Password_Generator
         public PasswordGeneratorForm()
         {
             InitializeComponent();
-           
         }
 
         private async void PasswordGeneratorForm_Load(object sender, EventArgs e)
@@ -30,27 +29,57 @@ namespace PasswordTree.Password_Generator
             try
             {
                 bool isSuccesful = await Settings.Password.Read();
-                if (!isSuccesful) throw new FileLoadException();
+                if (!isSuccesful) throw new Exception();
+            }
+            catch (Exception error) when (error is FileNotFoundException || error is FileLoadException || error is JsonReaderException)
+            {
+                MessageBox.Show("Tree is not complete\nUsing default Tree...", "Data Interruption", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                TreeNode tree = Data.DefaultTree();
+                Settings.Password.Tree = tree;
             }
             catch (Exception error)
             {
-                if (error is FileNotFoundException || error is FileLoadException || error is JsonReaderException)
-                {
-                    MessageBox.Show("Tree is not complete\nDon't worry, we assigned default Tree",
-                                    "Data Interruption", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    TreeNode tree = Data.DefaultTree();
-                    Settings.Password.Tree = tree;
-                }
-                else
-                {
-                    MessageBox.Show(error.Message, "Error Occurred", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
+                MessageBox.Show(error.Message, "Error Occurred", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Close();
+            }   
+
+            try
+            {
+                bool isSuccesful = Settings.Read();
+                if (!isSuccesful) throw new Exception();
             }
+            catch (Exception error)
+            {
+                MessageBox.Show(error.Message, "Error Occurred", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            checkBoxPasswordDistinct.Checked = Settings.Password.IsDistinct;
+            numericUpDownSelectionCooldown.Maximum = Settings.PasswordCatagory.MaximumLength;
+            numericUpDownSelectionCooldown.Value = Settings.PasswordCatagory.CurrentLength;
         }
 
         private void PasswordGeneratorForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            Settings.Password.WriteJson();
+            try
+            {
+                bool isSuccesful = Settings.Password.Write();
+                if (!isSuccesful) throw new Exception();
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Password couldn't save tree!", "Save Issue", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            try
+            {
+                bool isSuccesful = Settings.Write();
+                if (!isSuccesful) throw new Exception();
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Settings couldn't save attributes!", "Save Issue", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void BeforeAppend()
