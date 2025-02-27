@@ -63,7 +63,7 @@ namespace PasswordTree.Configuration
             private static string pathTree = "PasswordTree.json";
             public static int MaximumLength { get => string.Concat(Tree.PruneByCheckBoxes().Leaves().Select(leaf => leaf.Text)).Length; }
             public static int CurrentLength { get; set; } = 20;
-            public static TreeNode Tree { get; set; }
+            public static TreeNode Tree { get; set; } = Data.DefaultTree();
             public static bool IsDistinct { get; set; } = true;
             public static bool PreviousPasswordEnabled { get; set; } = true;
             public static int PreviousPasswordCount { get; set; } = 5;

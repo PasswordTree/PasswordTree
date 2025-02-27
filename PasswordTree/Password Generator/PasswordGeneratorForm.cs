@@ -51,7 +51,6 @@ namespace PasswordTree.Password_Generator
                     MessageBox.Show(error.Message, "Error Occurred", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
 
-                Settings.Password.Tree = Data.DefaultTree();
                 MessageBox.Show("App is using default Tree...", "No Worries", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
 
@@ -73,9 +72,10 @@ namespace PasswordTree.Password_Generator
                 MessageBox.Show("App is using default Settings...", "No Worries", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
 
-            checkBoxPasswordDistinct.Checked = Settings.Password.IsDistinct;
             numericUpDownSelectionCooldown.Maximum = Settings.PasswordCatagory.MaximumLength;
             numericUpDownSelectionCooldown.Value = Settings.PasswordCatagory.CurrentLength;
+            
+            checkBoxPasswordDistinct.Checked = Settings.Password.IsDistinct;
             numericPasswordLength.Value = Settings.Password.CurrentLength;
             textBoxPreviousPasswords.Enabled = Settings.Password.PreviousPasswordEnabled;
         }

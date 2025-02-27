@@ -196,7 +196,7 @@
             this.numericUpDownSelectionCooldown.Size = new System.Drawing.Size(37, 20);
             this.numericUpDownSelectionCooldown.TabIndex = 19;
             this.numericUpDownSelectionCooldown.Value = new decimal(new int[] {
-            2,
+            1,
             0,
             0,
             0});

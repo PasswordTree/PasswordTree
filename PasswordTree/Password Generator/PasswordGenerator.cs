@@ -33,7 +33,7 @@ namespace PasswordTree.Password_Generator
 
                 if (!previousCat.Contains(selectedCat))
                 {
-                    string value = selectedLeaf.ToString();
+                    string value = selectedLeaf.Text;
                     char selectedChar = value[random.Next(value.Length)];
 
                     if (!(Settings.Password.IsDistinct && password.Contains(selectedChar)))
