@@ -77,6 +77,7 @@ namespace PasswordTree.Password_Generator
             numericUpDownSelectionCooldown.Maximum = Settings.PasswordCatagory.MaximumLength;
             numericUpDownSelectionCooldown.Value = Settings.PasswordCatagory.CurrentLength;
             numericPasswordLength.Value = Settings.Password.CurrentLength;
+            textBoxPreviousPasswords.Enabled = Settings.Password.PreviousPasswordEnabled;
         }
 
         private void PasswordGeneratorForm_FormClosing(object sender, FormClosingEventArgs e)
@@ -157,6 +158,8 @@ namespace PasswordTree.Password_Generator
             {
                 numericUpDownSelectionCooldown.Value = maxCatLen;
             }
+
+           textBoxPreviousPasswords.Enabled = Settings.Password.PreviousPasswordEnabled;
         }
 
         private void checkBoxPasswordDistinct_CheckedChanged(object sender, EventArgs e)

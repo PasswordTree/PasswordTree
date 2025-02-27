@@ -33,6 +33,8 @@
             this.settingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutAppsIconToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.sourceCodeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.iconToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.textBoxCurrentPassword = new System.Windows.Forms.TextBox();
             this.buttonGeneratePassword = new System.Windows.Forms.Button();
             this.textBoxPreviousPasswords = new System.Windows.Forms.TextBox();
@@ -43,8 +45,6 @@
             this.numericUpDownSelectionCooldown = new System.Windows.Forms.NumericUpDown();
             this.checkBoxPasswordDistinct = new System.Windows.Forms.CheckBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.iconToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.sourceCodeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericPasswordLength)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownSelectionCooldown)).BeginInit();
@@ -87,6 +87,22 @@
             this.aboutAppsIconToolStripMenuItem.Size = new System.Drawing.Size(215, 22);
             this.aboutAppsIconToolStripMenuItem.Text = "About Password Generator";
             // 
+            // sourceCodeToolStripMenuItem
+            // 
+            this.sourceCodeToolStripMenuItem.BackColor = System.Drawing.Color.White;
+            this.sourceCodeToolStripMenuItem.Name = "sourceCodeToolStripMenuItem";
+            this.sourceCodeToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
+            this.sourceCodeToolStripMenuItem.Text = "Code Source";
+            this.sourceCodeToolStripMenuItem.Click += new System.EventHandler(this.sourceCodeToolStripMenuItem_Click);
+            // 
+            // iconToolStripMenuItem
+            // 
+            this.iconToolStripMenuItem.BackColor = System.Drawing.Color.White;
+            this.iconToolStripMenuItem.Name = "iconToolStripMenuItem";
+            this.iconToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
+            this.iconToolStripMenuItem.Text = "Icon Picture Source";
+            this.iconToolStripMenuItem.Click += new System.EventHandler(this.iconToolStripMenuItem_Click);
+            // 
             // textBoxCurrentPassword
             // 
             this.textBoxCurrentPassword.BackColor = System.Drawing.Color.White;
@@ -94,12 +110,12 @@
             this.textBoxCurrentPassword.MaxLength = 200;
             this.textBoxCurrentPassword.Name = "textBoxCurrentPassword";
             this.textBoxCurrentPassword.ReadOnly = true;
-            this.textBoxCurrentPassword.Size = new System.Drawing.Size(196, 20);
+            this.textBoxCurrentPassword.Size = new System.Drawing.Size(225, 20);
             this.textBoxCurrentPassword.TabIndex = 2;
             // 
             // buttonGeneratePassword
             // 
-            this.buttonGeneratePassword.Location = new System.Drawing.Point(251, 136);
+            this.buttonGeneratePassword.Location = new System.Drawing.Point(280, 133);
             this.buttonGeneratePassword.Name = "buttonGeneratePassword";
             this.buttonGeneratePassword.Size = new System.Drawing.Size(75, 23);
             this.buttonGeneratePassword.TabIndex = 3;
@@ -127,7 +143,7 @@
             0});
             this.numericPasswordLength.Location = new System.Drawing.Point(125, 159);
             this.numericPasswordLength.Maximum = new decimal(new int[] {
-            200,
+            120,
             0,
             0,
             0});
@@ -191,7 +207,7 @@
             this.checkBoxPasswordDistinct.AutoSize = true;
             this.checkBoxPasswordDistinct.Checked = true;
             this.checkBoxPasswordDistinct.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBoxPasswordDistinct.Location = new System.Drawing.Point(332, 109);
+            this.checkBoxPasswordDistinct.Location = new System.Drawing.Point(367, 109);
             this.checkBoxPasswordDistinct.Name = "checkBoxPasswordDistinct";
             this.checkBoxPasswordDistinct.Size = new System.Drawing.Size(61, 17);
             this.checkBoxPasswordDistinct.TabIndex = 18;
@@ -207,22 +223,6 @@
             this.label4.Size = new System.Drawing.Size(95, 13);
             this.label4.TabIndex = 21;
             this.label4.Text = "Password Length: ";
-            // 
-            // iconToolStripMenuItem
-            // 
-            this.iconToolStripMenuItem.BackColor = System.Drawing.Color.White;
-            this.iconToolStripMenuItem.Name = "iconToolStripMenuItem";
-            this.iconToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.iconToolStripMenuItem.Text = "Icon Picture Source";
-            this.iconToolStripMenuItem.Click += new System.EventHandler(this.iconToolStripMenuItem_Click);
-            // 
-            // sourceCodeToolStripMenuItem
-            // 
-            this.sourceCodeToolStripMenuItem.BackColor = System.Drawing.Color.White;
-            this.sourceCodeToolStripMenuItem.Name = "sourceCodeToolStripMenuItem";
-            this.sourceCodeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.sourceCodeToolStripMenuItem.Text = "Code Source";
-            this.sourceCodeToolStripMenuItem.Click += new System.EventHandler(this.sourceCodeToolStripMenuItem_Click);
             // 
             // PasswordGeneratorForm
             // 
