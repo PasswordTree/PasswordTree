@@ -7,9 +7,7 @@ This PassTree select from leaves of tree then checks if this topic is selected b
 ## Installation
 
 ### Windows 7
-
 For windows 7 you have to install [.Net Frameworkd 4.8](https://dotnet.microsoft.com/en-us/download/dotnet-framework/thank-you/net48-offline-installer) first, then install [PasswordTree](https://github.com/PasswordTree/PasswordTree/releases/tag/password)
 
 ### Windows 10 & 11
-
-For windows 10 & 11 there is no dependency for installation as long as they included .Net Framework 4.8
+For windows 10 & 11 there is no dependency for installing [PasswordTree](https://github.com/PasswordTree/PasswordTree/releases/tag/password) as long as they included .Net Framework 4.8
