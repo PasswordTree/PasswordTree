@@ -5,6 +5,7 @@ So many times, I wanted to get a instant password but all common password genera
 ## Password Generator
 I create a tree for generating password whose selection is based on level 1 nodes of tree which is topics (Letter, Number, Symbol)
 This PassTree select from leaves of tree then checks if this topic is selected before or not
+
 ![image](https://github.com/user-attachments/assets/70f115ac-6333-4880-a72e-f072b7d1924c)
 
 
