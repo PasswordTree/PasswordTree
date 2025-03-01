@@ -190,5 +190,23 @@ namespace PasswordTree.Password_Generator
                 form.ShowDialog();
             }
         }
+
+        private void textBoxCurrentPassword_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            textBoxCurrentPassword.SelectAll();
+        }
+
+        private void copyToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            TextBox textBox = contextMenuStrip1.SourceControl as TextBox;
+            if (textBox.SelectionLength > 0)
+            {
+                textBox.Copy();
+            }
+            else
+            {
+                Clipboard.SetText(textBox.Text);
+            }
+        }
     }
 }
