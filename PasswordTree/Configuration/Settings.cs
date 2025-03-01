@@ -60,7 +60,7 @@ namespace PasswordTree.Configuration
 
         internal static class Password
         {
-            private static string pathTree = "PasswordTree.json";
+            private static string pathTree = "Tree.json";
             public static int MaximumLength { get => string.Concat(Tree.PruneByCheckBoxes().Leaves().Select(leaf => leaf.Text)).Length; }
             public static int CurrentLength { get; set; } = 20;
             public static TreeNode Tree { get; set; } = Data.DefaultTree();
@@ -70,10 +70,10 @@ namespace PasswordTree.Configuration
 
             public static async Task<bool> Read()
             {
-                if (!File.Exists(pathTree)) throw new FileNotFoundException($"File dosen't exist at {pathTree}");
+                if (!File.Exists(pathTree)) throw new FileNotFoundException($"File dosen't exist");
 
                 FileInfo fileInfo = new FileInfo(pathTree);
-                if (fileInfo.Length == 0) throw new FileLoadException($"Can't load file at {pathTree}");
+                if (fileInfo.Length == 0) throw new FileLoadException($"Can't load file");
 
                 using (StreamReader sr = new StreamReader(pathTree))
                 {
@@ -96,7 +96,7 @@ namespace PasswordTree.Configuration
 
         public static bool Read()
         {
-            if (!File.Exists(pathAtt)) throw new FileNotFoundException($"File dosen't exist at {pathAtt}");
+            if (!File.Exists(pathAtt)) throw new FileNotFoundException($"File dosen't exist");
 
             var serializer = new XmlSerializer(typeof(SettingsAttributes));
             using (var stream = new FileStream(pathAtt, FileMode.Open))

@@ -36,11 +36,11 @@ namespace PasswordTree.Password_Generator
             {
                 if (error is FileNotFoundException)
                 {
-                    MessageBox.Show(error.Message, "Tree File, Not Found", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Tree File, Not Found", error.Message, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 else if (error is FileLoadException)
                 {
-                    MessageBox.Show(error.Message, "Loading Tree File, Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Loading Tree File, Failed", error.Message, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 else if (error is JsonReaderException)
                 {
@@ -63,7 +63,7 @@ namespace PasswordTree.Password_Generator
             {
                 if (error is FileNotFoundException)
                 {
-                    MessageBox.Show(error.Message, "Config File, Not Found", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Config File, Not Found", error.Message, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 else
                 {
