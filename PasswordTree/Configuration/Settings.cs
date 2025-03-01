@@ -9,6 +9,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Runtime;
+using System.Security.AccessControl;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -29,7 +30,8 @@ namespace PasswordTree.Configuration
     }
     internal static class Settings
     {
-        private static string pathAtt = "app.config";
+        private static string pathDefault = $"{Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)}\\PasswordTree\\";
+        private static string pathAtt = pathDefault + "app.config";
 
 
         internal static class PasswordCatagory
@@ -60,7 +62,7 @@ namespace PasswordTree.Configuration
 
         internal static class Password
         {
-            private static string pathTree = "PasswordTree.json";
+            private static string pathTree = pathDefault + "Tree.json";
             public static int MaximumLength { get => string.Concat(Tree.PruneByCheckBoxes().Leaves().Select(leaf => leaf.Text)).Length; }
             public static int CurrentLength { get; set; } = 20;
             public static TreeNode Tree { get; set; } = Data.DefaultTree();
@@ -70,10 +72,10 @@ namespace PasswordTree.Configuration
 
             public static async Task<bool> Read()
             {
-                if (!File.Exists(pathTree)) throw new FileNotFoundException($"File dosen't exist at {pathTree}");
+                if (!File.Exists(pathTree)) throw new FileNotFoundException($"File dosen't exist");
 
                 FileInfo fileInfo = new FileInfo(pathTree);
-                if (fileInfo.Length == 0) throw new FileLoadException($"Can't load file at {pathTree}");
+                if (fileInfo.Length == 0) throw new FileLoadException($"Can't load file");
 
                 using (StreamReader sr = new StreamReader(pathTree))
                 {
@@ -86,7 +88,17 @@ namespace PasswordTree.Configuration
 
             public static bool Write()
             {
+                Directory.CreateDirectory(pathTree);
                 if (Tree is null) throw new ArgumentNullException("Given Tree is null!");
+
+                // Grant write permission to the current user
+                DirectorySecurity security = Directory.GetAccessControl(pathTree);
+                security.AddAccessRule(new FileSystemAccessRule(Environment.UserName,
+                    FileSystemRights.Write | FileSystemRights.Modify,
+                    InheritanceFlags.ContainerInherit | InheritanceFlags.ObjectInherit,
+                    PropagationFlags.None,
+                    AccessControlType.Allow));
+                Directory.SetAccessControl(pathTree, security);
 
                 string text = JsonConvert.SerializeObject(Tree, TreeNodeConverterCustom.SerializerSettings());
                 File.WriteAllText(pathTree, text);
@@ -96,7 +108,7 @@ namespace PasswordTree.Configuration
 
         public static bool Read()
         {
-            if (!File.Exists(pathAtt)) throw new FileNotFoundException($"File dosen't exist at {pathAtt}");
+            if (!File.Exists(pathAtt)) throw new FileNotFoundException($"File dosen't exist");
 
             var serializer = new XmlSerializer(typeof(SettingsAttributes));
             using (var stream = new FileStream(pathAtt, FileMode.Open))
@@ -114,14 +126,15 @@ namespace PasswordTree.Configuration
 
         public static bool Write()
         {
-           SettingsAttributes settings = new SettingsAttributes()
-           {
-               PasswordCatagoryCurrentLength = PasswordCatagory.CurrentLength,
-               PasswordCurrentLength = Password.CurrentLength,
-               IsDistinct = Password.IsDistinct,
-               PreviousPasswordEnabled = Password.PreviousPasswordEnabled,
-               PreviousPasswordCount = Password.PreviousPasswordCount
-           };
+            Directory.CreateDirectory(pathAtt);
+            SettingsAttributes settings = new SettingsAttributes()
+            {
+                PasswordCatagoryCurrentLength = PasswordCatagory.CurrentLength,
+                PasswordCurrentLength = Password.CurrentLength,
+                IsDistinct = Password.IsDistinct,
+                PreviousPasswordEnabled = Password.PreviousPasswordEnabled,
+                PreviousPasswordCount = Password.PreviousPasswordCount
+            };
 
             var serializer = new XmlSerializer(typeof(SettingsAttributes));
             using (var stream = new FileStream(pathAtt, FileMode.Create))
