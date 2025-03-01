@@ -29,7 +29,7 @@ namespace PasswordTree.Configuration
     }
     internal static class Settings
     {
-        private static string pathAtt = "app.config";
+        private static string pathAtt = "PasswordTree.config";
 
 
         internal static class PasswordCatagory
