@@ -20,7 +20,7 @@ You can even select which leaves you prefer to be selected by app via Settings p
 ## Installation
 
 ### Windows 7
-For windows 7 you have to install [.Net Frameworkd 4.8](https://dotnet.microsoft.com/en-us/download/dotnet-framework/thank-you/net48-offline-installer) first, then install [PasswordTree](https://github.com/PasswordTree/PasswordTree/releases/tag/releases)
+For windows 7 you have to install [.Net Frameworkd 4.8](https://dotnet.microsoft.com/en-us/download/dotnet-framework/thank-you/net48-offline-installer) first, then install [PasswordTree](https://github.com/PasswordTree/PasswordTree/releases)
 
 ### Windows 10 & 11
 For windows 10 & 11 there is no dependency for installing [PasswordTree](https://github.com/PasswordTree/PasswordTree/releases) as long as they included .Net Framework 4.8
