@@ -208,5 +208,42 @@ namespace PasswordTree.Password_Generator
                 Clipboard.SetText(textBox.Text);
             }
         }
+
+        private void textBoxPreviousPasswords_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Control && e.KeyCode == Keys.V)
+            {
+                e.SuppressKeyPress = true;
+            }
+        }
+
+        private void textBoxPreviousPasswords_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            if (textBoxPreviousPasswords.Text == "")
+            {
+                return;
+            }
+
+            int index = textBoxPreviousPasswords.SelectionStart;
+
+            int start = textBoxPreviousPasswords.Text.LastIndexOf("\r\n", index);
+            if (start == -1)
+            {
+                start = 0;
+            }
+            else
+            {
+                start += 2; 
+            }
+
+            int end = textBoxPreviousPasswords.Text.IndexOf("\r\n", index);
+            if (end == -1)
+            {
+                end = textBoxPreviousPasswords.Text.Length;
+            }
+
+            textBoxPreviousPasswords.SelectionStart = start;
+            textBoxPreviousPasswords.SelectionLength = end - start;
+        }
     }
 }

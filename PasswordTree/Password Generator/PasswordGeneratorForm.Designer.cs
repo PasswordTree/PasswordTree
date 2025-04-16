@@ -37,6 +37,8 @@
             this.sourceCodeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.iconToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.textBoxCurrentPassword = new System.Windows.Forms.TextBox();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.copyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.buttonGeneratePassword = new System.Windows.Forms.Button();
             this.textBoxPreviousPasswords = new System.Windows.Forms.TextBox();
             this.numericPasswordLength = new System.Windows.Forms.NumericUpDown();
@@ -46,12 +48,10 @@
             this.numericUpDownSelectionCooldown = new System.Windows.Forms.NumericUpDown();
             this.checkBoxPasswordDistinct = new System.Windows.Forms.CheckBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.copyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
+            this.contextMenuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericPasswordLength)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownSelectionCooldown)).BeginInit();
-            this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -96,7 +96,7 @@
             this.sourceCodeToolStripMenuItem.BackColor = System.Drawing.Color.White;
             this.sourceCodeToolStripMenuItem.Name = "sourceCodeToolStripMenuItem";
             this.sourceCodeToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
-            this.sourceCodeToolStripMenuItem.Text = "Code Source";
+            this.sourceCodeToolStripMenuItem.Text = "Source Code";
             this.sourceCodeToolStripMenuItem.Click += new System.EventHandler(this.sourceCodeToolStripMenuItem_Click);
             // 
             // iconToolStripMenuItem
@@ -115,10 +115,24 @@
             this.textBoxCurrentPassword.MaxLength = 200;
             this.textBoxCurrentPassword.Name = "textBoxCurrentPassword";
             this.textBoxCurrentPassword.ReadOnly = true;
-            this.textBoxCurrentPassword.ShortcutsEnabled = false;
             this.textBoxCurrentPassword.Size = new System.Drawing.Size(225, 20);
             this.textBoxCurrentPassword.TabIndex = 2;
             this.textBoxCurrentPassword.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.textBoxCurrentPassword_MouseDoubleClick);
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.copyToolStripMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(103, 26);
+            // 
+            // copyToolStripMenuItem
+            // 
+            this.copyToolStripMenuItem.BackColor = System.Drawing.Color.White;
+            this.copyToolStripMenuItem.Name = "copyToolStripMenuItem";
+            this.copyToolStripMenuItem.Size = new System.Drawing.Size(102, 22);
+            this.copyToolStripMenuItem.Text = "Copy";
+            this.copyToolStripMenuItem.Click += new System.EventHandler(this.copyToolStripMenuItem_Click);
             // 
             // buttonGeneratePassword
             // 
@@ -139,9 +153,10 @@
             this.textBoxPreviousPasswords.Name = "textBoxPreviousPasswords";
             this.textBoxPreviousPasswords.ReadOnly = true;
             this.textBoxPreviousPasswords.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.textBoxPreviousPasswords.ShortcutsEnabled = false;
             this.textBoxPreviousPasswords.Size = new System.Drawing.Size(302, 74);
             this.textBoxPreviousPasswords.TabIndex = 4;
+            this.textBoxPreviousPasswords.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBoxPreviousPasswords_KeyDown);
+            this.textBoxPreviousPasswords.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.textBoxPreviousPasswords_MouseDoubleClick);
             // 
             // numericPasswordLength
             // 
@@ -233,21 +248,6 @@
             this.label4.TabIndex = 21;
             this.label4.Text = "Password Length: ";
             // 
-            // contextMenuStrip1
-            // 
-            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.copyToolStripMenuItem});
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(181, 48);
-            // 
-            // copyToolStripMenuItem
-            // 
-            this.copyToolStripMenuItem.BackColor = System.Drawing.Color.White;
-            this.copyToolStripMenuItem.Name = "copyToolStripMenuItem";
-            this.copyToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.copyToolStripMenuItem.Text = "Copy";
-            this.copyToolStripMenuItem.Click += new System.EventHandler(this.copyToolStripMenuItem_Click);
-            // 
             // PasswordGeneratorForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -275,9 +275,9 @@
             this.Load += new System.EventHandler(this.PasswordGeneratorForm_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            this.contextMenuStrip1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.numericPasswordLength)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownSelectionCooldown)).EndInit();
-            this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
