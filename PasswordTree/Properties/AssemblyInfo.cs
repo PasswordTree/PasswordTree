@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("ALi Moradzade")]
 [assembly: AssemblyProduct("PasswordTree")]
-[assembly: AssemblyCopyright("Copyright ©  2025")]
+[assembly: AssemblyCopyright("ALi Moradzade")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
