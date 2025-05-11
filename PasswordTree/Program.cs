@@ -1,8 +1,6 @@
-﻿using PasswordTree.Password_Generator;
+using PasswordTree.Password_Generator;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace PasswordTree
@@ -15,9 +13,23 @@ namespace PasswordTree
         [STAThread]
         static void Main()
         {
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new PasswordGeneratorForm());
+            using (Mutex mutex = new Mutex(true, "PasswordTree", out bool firstInstance))
+            {
+                if (firstInstance)
+                {
+                    Application.EnableVisualStyles();
+                    Application.SetCompatibleTextRenderingDefault(false);
+                    Application.Run(new PasswordGeneratorForm());
+                }
+                else
+                {
+                    MessageBox.Show(
+                        "Another instance is already running!",
+                        "Application is running...",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Stop);
+                }
+            }
         }
     }
 }

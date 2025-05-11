@@ -1,18 +1,11 @@
-﻿using Newtonsoft.Json;
+using Newtonsoft.Json;
 using PasswordTree.Configuration;
 using PasswordTree.Help_Section;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Diagnostics;
-using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using static PasswordTree.Configuration.Settings;
 
 namespace PasswordTree.Password_Generator
 {

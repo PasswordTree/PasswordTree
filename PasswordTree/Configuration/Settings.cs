@@ -1,21 +1,11 @@
-﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
+using Newtonsoft.Json;
 using PasswordTree.Password_Generator;
-using PasswordTree.Properties;
 using System;
-using System.Collections.Generic;
-using System.Drawing.Drawing2D;
 using System.IO;
 using System.Linq;
-using System.Reflection;
-using System.Runtime;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Xml.Linq;
 using System.Xml.Serialization;
-using static PasswordTree.Configuration.Settings;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace PasswordTree.Configuration
 {
