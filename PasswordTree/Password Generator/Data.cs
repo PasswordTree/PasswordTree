@@ -65,6 +65,7 @@ namespace PasswordTree.Password_Generator
                     }) { Name = "Symbol & Punctuation" },
                 }) { Name = "S (root)" };
 
+            // Name attribute is for key with which we can call subtree
             var node = t.Nodes["Letter"].Nodes["Latin"].Nodes["ASCII"];
             node.Checked = true;
             node.UpdateNodesCheck();

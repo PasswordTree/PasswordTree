@@ -6,24 +6,24 @@ using System.Windows.Forms;
 
 namespace PasswordTree.Password_Generator
 {
-    internal class PasswordGenerator
+    internal class Password
     {
         private Random random = new Random();
 
-        public string Create(int passwordLength)
+        public string Generate(int requestedLength)
         {
             string password = "";
             List<TreeNode> previousCat = new List<TreeNode>();
             var prunedLeaves = Settings.Password.Tree.PruneByCheckBoxes().Leaves();
 
             int maxPassLength = Settings.Password.MaximumLength;
-            if (Settings.Password.IsDistinct && passwordLength > maxPassLength)
+            if (Settings.Password.IsDistinct && requestedLength > maxPassLength)
             {
                 throw new ArgumentOutOfRangeException("Sum of all selected leaves is less than password length\n" +
                                                       $"Max length based on selected nodes: {maxPassLength}");
             }
 
-            while (password.Length < passwordLength)
+            while (password.Length < requestedLength)
             {
                 int randomLeafIndex = random.Next(prunedLeaves.Length);
                 TreeNode selectedLeaf = prunedLeaves[randomLeafIndex];

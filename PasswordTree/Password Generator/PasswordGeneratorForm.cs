@@ -121,8 +121,8 @@ namespace PasswordTree.Password_Generator
         {
             try
             {
-                PasswordGenerator passwordGenerator = new PasswordGenerator();
-                string password = passwordGenerator.Create((int)numericPasswordLength.Value);
+                Password passwordGenerator = new Password();
+                string password = passwordGenerator.Generate((int)numericPasswordLength.Value);
 
                 BeforeAppend();
                 textBoxCurrentPassword.Text = password;
